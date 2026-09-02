@@ -1,24 +1,51 @@
-<section id="latihan-2">
-  <h2>Contoh Penerapan Alt Text</h2>
-  <article>
-    <h3>1. Gambar Informatif</h3>
-    <p>Peta wilayah persebaran pasar:</p>
-    <img src="peta-tarakan.png" alt="Peta wilayah Kota Tarakan yang menampilkan lokasi titik pasar tradisional">
-
-    <p>Grafik harga pangan harian:</p>
-    <img src="grafik-perubahan-tarakan.png" alt="Grafik batang yang menunjukkan fluktuasi harga rata-rata bahan pokok di Tarakan">
-
-    <h3>2. Gambar Dekoratif</h3>
-    <p>Garis pemisah di bawah ini diabaikan oleh screen reader:</p>
-    <img src="garis-pembatas.png" alt="">
-
-    <p>Ikon berdampingan dengan teks:</p>
-    <img src="icon-list.png" alt=""> <span>Pasar Gusher: Rp. 14.000</span>
-
-    <h3>3. Gambar sebagai Tautan (Link)</h3>
-    <p>Klik logo di bawah ini untuk kembali ke beranda:</p>
-    <a href="#main">
-      <img src="logo-tarakan.png" alt="Kembali ke halaman utama Dashboard Harga Pangan">
-    </a>
-  </article>
+<section id="tabel-harga">
+  <h2>Tabel Detail Harga Pangan</h2>
+  
+  <!-- div pembungkus dengan tabindex="0" memungkinkan tabel digeser/di-scroll menggunakan keyboard panah jika layar kecil -->
+  <div style="overflow-x: auto;" tabindex="0" aria-labelledby="tabel-caption">
+    <table border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
+      <caption id="tabel-caption" style="caption-side: top; font-weight: bold; padding: 10px 0;">
+        Daftar Harga Komoditas Berdasarkan Pasar di Tarakan
+      </caption>
+      
+      <thead>
+        <tr style="background-color: #f2f2f2;">
+          <!-- scope="col" memberi tahu screen reader bahwa ini adalah header untuk kolom -->
+          <th scope="col" style="padding: 8px;">Komoditas</th>
+          <th scope="col" style="padding: 8px;">Lokasi Pasar</th>
+          <th scope="col" style="padding: 8px;">Harga (Rp)</th>
+          <th scope="col" style="padding: 8px;">Aksi</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr>
+          <!-- scope="row" memberi tahu screen reader bahwa ini adalah header untuk baris -->
+          <th scope="row" style="padding: 8px;">Beras Kualitas Bawah I</th>
+          <td style="padding: 8px;">Pasar Gusher</td>
+          <td style="padding: 8px;">14.000 / Kg</td>
+          <td style="padding: 8px;">
+            <!-- Tombol ini secara otomatis dapat difokuskan oleh tombol Tab -->
+            <button type="button" aria-label="Lihat grafik harga beras di Pasar Gusher">Lihat Grafik</button>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" style="padding: 8px;">Bawang Merah</th>
+          <td style="padding: 8px;">Pasar Tenguyun</td>
+          <td style="padding: 8px;">35.000 / Kg</td>
+          <td style="padding: 8px;">
+            <button type="button" aria-label="Lihat grafik harga bawang merah di Pasar Tenguyun">Lihat Grafik</button>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" style="padding: 8px;">Cabai Rawit Merah</th>
+          <td style="padding: 8px;">Pasar Boom Panjang</td>
+          <td style="padding: 8px;">60.000 / Kg</td>
+          <td style="padding: 8px;">
+            <button type="button" aria-label="Lihat grafik harga cabai rawit di Pasar Boom Panjang">Lihat Grafik</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
