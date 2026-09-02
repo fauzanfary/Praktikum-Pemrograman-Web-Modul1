@@ -3,16 +3,16 @@
 <head>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <meta name="description" content="Dashboard Informasi Harga Pangan Antar Daerah">
-   <title>Dashboard Harga Pangan Nasional</title>
+   <meta name="description" content="Dashboard Informasi Harga Pangan Kota Tarakan">
+   <title>Dashboard Harga Pangan Tarakan</title>
 </head>
 <body>
 <header>
    <a href="#main">Lewati ke konten utama</a>
    <!-- Alt Text Dekoratif 1 -->
-   <img src="logo-pihps.png" alt="" aria-hidden="true">
+   <img src="logo-tarakan.png" alt="" aria-hidden="true">
    
-   <h1>Pusat Informasi Harga Pangan</h1>
+   <h1>Pusat Informasi Harga Pangan Tarakan</h1>
    <nav aria-label="Navigasi utama">
      <a href="#beranda">Beranda</a>
      <a href="#tabel-harga">Tabel Harga</a>
@@ -22,21 +22,21 @@
 
 <main id="main">
    <section id="filter-data">
-     <h2>Filter Informasi Harga Pangan Antar Daerah</h2>
+     <h2>Filter Informasi Harga Pangan Area Tarakan</h2>
      <form action="#" method="GET">
        <label for="komoditas">Komoditas</label>
        <select id="komoditas" name="komoditas">
            <option value="beras">Beras</option>
+           <option value="bawang-merah">Bawang Merah</option>
+           <option value="cabai-rawit">Cabai Rawit</option>
        </select>
        
-       <label for="jenis-pasar">Jenis Pasar</label>
-       <select id="jenis-pasar" name="jenis-pasar">
-           <option value="tradisional">Pasar Tradisional</option>
-       </select>
-
-       <label for="provinsi">Provinsi</label>
-       <select id="provinsi" name="provinsi">
-           <option value="semua">Semua Provinsi</option>
+       <label for="lokasi-pasar">Lokasi Pasar</label>
+       <select id="lokasi-pasar" name="lokasi-pasar">
+           <option value="semua">Semua Pasar</option>
+           <option value="gusher">Pasar Gusher</option>
+           <option value="tenguyun">Pasar Tenguyun</option>
+           <option value="boom-panjang">Pasar Boom Panjang</option>
        </select>
 
        <button type="submit">Cari Data</button>
@@ -44,17 +44,18 @@
    </section>
 
    <section id="visualisasi-peta">
-     <h2>Peta Persebaran Harga</h2>
+     <h2>Peta Persebaran Harga di Tarakan</h2>
      <!-- Alt Text Informatif 1 -->
-     <img src="peta-indonesia.png" alt="Peta interaktif Indonesia yang menampilkan gradasi warna berdasarkan tingkat harga beras per kilogram">
+     <img src="peta-tarakan.png" alt="Peta wilayah Kota Tarakan yang menampilkan lokasi titik pasar tradisional">
      
      <article>
-       <h3>Daftar Harga per Provinsi</h3>
+       <h3>Daftar Harga Berdasarkan Pasar</h3>
        <!-- Alt Text Dekoratif 2 -->
        <img src="icon-list.png" alt="" aria-hidden="true">
        <ul>
-           <li>Nusa Tenggara Barat: Rp. 13.850</li>
-           <li>Sulawesi Selatan: Rp. 14.350</li>
+           <li>Pasar Gusher: Rp. 14.000</li>
+           <li>Pasar Tenguyun: Rp. 14.500</li>
+           <li>Pasar Boom Panjang: Rp. 14.200</li>
        </ul>
      </article>
    </section>
@@ -62,17 +63,13 @@
    <section id="harga-rata-rata">
      <h2>Harga Rata-Rata dan Perubahan</h2>
      <!-- Alt Text Informatif 2 -->
-     <img src="grafik-perubahan.png" alt="Grafik batang yang menunjukkan fluktuasi harga rata-rata bawang merah dan bawang putih hari ini">
+     <img src="grafik-perubahan-tarakan.png" alt="Grafik batang yang menunjukkan fluktuasi harga rata-rata bahan pokok di Tarakan hari ini">
      <p>Data pembaruan terakhir: 02 September 2026.</p>
    </section>
 </main>
 
 <footer>
    <p>&copy; 2026 Dashboard Pangan UBT</p>
-   <!-- Alt Text Tautan 1 -->
-   <a href="https://play.google.com/">
-       <img src="badge-google-play.png" alt="Unduh aplikasi kami di Google Play Store">
-   </a>
 </footer>
 </body>
 </html>
