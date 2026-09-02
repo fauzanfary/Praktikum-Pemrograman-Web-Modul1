@@ -1,3 +1,33 @@
+<!-- 1. Contoh 5 Alt Text -->
+<section id="latihan-alt-text">
+  <h2>Contoh Penerapan Alt Text</h2>
+  <article>
+    <h3>1. Gambar Informatif</h3>
+    <p>Peta wilayah persebaran pasar:</p>
+    <!-- Gambar dengan deskripsi spesifik -->
+    <img src="peta-tarakan.png" alt="Peta wilayah Kota Tarakan yang menampilkan lokasi titik pasar tradisional">
+
+    <p>Grafik harga pangan harian:</p>
+    <img src="grafik-perubahan-tarakan.png" alt="Grafik batang yang menunjukkan fluktuasi harga rata-rata bahan pokok di Tarakan">
+
+    <h3>2. Gambar Dekoratif</h3>
+    <p>Garis pemisah di bawah ini diabaikan oleh screen reader:</p>
+    <!-- Gambar dikosongkan karena hanya dekorasi -->
+    <img src="garis-pembatas.png" alt="">
+
+    <p>Ikon berdampingan dengan teks:</p>
+    <img src="icon-list.png" alt=""> <span>Pasar Gusher: Rp. 14.000</span>
+
+    <h3>3. Gambar sebagai Tautan (Link)</h3>
+    <p>Klik logo di bawah ini untuk kembali ke beranda:</p>
+    <!-- Alt text mendeskripsikan tujuan klik, bukan gambar logonya -->
+    <a href="#main">
+      <img src="logo-tarakan.png" alt="Kembali ke halaman utama Dashboard Harga Pangan">
+    </a>
+  </article>
+</section>
+
+<!-- 2. Tabel Data (Dari Kode Anda) -->
 <section id="tabel-harga">
   <h2>Tabel Detail Harga Pangan</h2>
   
@@ -48,4 +78,19 @@
       </tbody>
     </table>
   </div>
+</section>
+
+<!-- 3. Form Kontak dengan Label -->
+<section id="kontak">
+  <h2>Kontak Pendataan Pasar</h2>
+  <form action="#" method="POST">
+    <!-- Atribut for pada label terhubung langsung dengan id pada input -->
+    <label for="nama">Nama Petugas</label>
+    <input type="text" id="nama" name="nama" value="Ahmad" required>
+
+    <label for="lokasi">Lokasi Pasar</label>
+    <input type="text" id="lokasi" name="lokasi" value="Pasar Gusher Tarakan" required>
+
+    <button type="submit">Kirim Data</button>
+  </form>
 </section>
