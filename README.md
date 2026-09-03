@@ -13,12 +13,13 @@ Portal informasi layanan publik untuk memantau fluktuasi harga komoditas pangan 
 ## Tugas OBE
 
 | No. | Nama Request | Method | Status | Type |
-| :--- | :--- | :--- | :--- | :--- |
-| 1. | www.bpjs-kesehatan.go.id | GET | 200 | document |
-| 2. | jquery.js | GET | 200 | script |
-| 3. | main.2d9811335dac0a91.js | GET | 200 | script |
-| 4. | id.json | GET | 200 | xhr |
-| 5. | id.json | GET | 200 | svg+xml |
+|:---:|---|:---:|:---:|---|---|
+| **1** | `swiper-bundle.min.css` | GET | 200 | `stylesheet` |
+| **2** | `UBT_bkkbn01.jpg` | GET | 200 | `webp` |
+| **3** | `imagesloaded.min.js?ver=5.0.0` | GET | 200 | `script` |
+| **4** | `...pxiDyp8kv8JHg...woff2` | GET | 200 | `woff2` |
+| **5** | `/css2?family=Poppins:wght@400;600;700&display=swap` | GET | 200 | `stylesheet` |
+
 
 ## Modul 2
 
@@ -29,4 +30,3 @@ Portal informasi layanan publik untuk memantau fluktuasi harga komoditas pangan 
 | Atribut Alt Gambar | Terpenuhi | Gambar informatif menyertakan deskripsi kontekstual; gambar dekoratif menggunakan `alt=""`. |
 | Label Form | Terpenuhi | Seluruh elemen `<select>` dan tombol terhubung secara eksplisit via `for` dan `id`. |
 | Navigasi Keyboard | Terpenuhi | Tab index mengikuti aliran visual dokumen alami tanpa keyboard trap; dilengkapi skip link ke `#main`. |
-
