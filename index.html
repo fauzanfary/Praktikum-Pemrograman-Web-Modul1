@@ -3,72 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sembako Hub Tarakan</title>
+    <meta name="description" content="Sistem Distribusi Sembako Terpadu Tarakan untuk B2B dan B2C">
+    <meta name="author" content="Ahmad Fauzan Al Ghifari">
+    <title>Sembako Hub Tarakan - Portal Transaksi</title>
 </head>
 <body>
 
+    <!-- Header & Navigasi -->
     <header>
         <h1>Sembako Hub Tarakan</h1>
         <nav aria-label="Navigasi Utama">
             <ul>
-                <li><a href="#katalog">Katalog Harga</a></li>
+                <li><a href="#katalog">Katalog Sembako</a></li>
                 <li><a href="#keranjang">Keranjang Belanja</a></li>
-                <li><a href="#login">Login Admin / Grosir</a></li>
+                <li><a href="#pesanan">Lacak Pesanan</a></li>
             </ul>
         </nav>
+        
+        <!-- Form kontrol role (Simulasi fitur dinamis) -->
+        <form id="role-selector">
+            <label for="userRole">Masuk Sebagai:</label>
+            <select id="userRole" name="role">
+                <option value="guest">Masyarakat (Eceran)</option>
+                <option value="warung">Pemilik Warung (Grosir)</option>
+                <option value="admin">Admin Dinas</option>
+            </select>
+        </form>
     </header>
 
     <main>
-        <section id="informasi">
-            <h2>Pusat Informasi Harga Pangan Strategis Tarakan</h2>
-            <p>Menampilkan harga rata-rata bahan pokok untuk masyarakat dan warung.</p>
+        <!-- Seksi Informasi Dasbor -->
+        <section id="informasi-pasar">
+            <h2>Ringkasan Harga Pangan</h2>
+            <p>Pembaruan harga terakhir: <time datetime="2026-09-08">08 September 2026</time></p>
+            
+            <!-- Elemen Details untuk informasi tambahan yang bisa dilipat (accordion bawaan HTML) -->
+            <details>
+                <summary>Ketentuan Pembelian Grosir (B2B)</summary>
+                <p>Khusus akun warung terdaftar, minimum pembelian untuk mendapatkan harga grosir adalah 5 satuan besar (karung/dus).</p>
+            </details>
         </section>
 
+        <hr>
+
+        <!-- Seksi Katalog Menggunakan Description List (dl, dt, dd) -->
         <section id="katalog">
-            <h2>Katalog Produk</h2>
+            <h2>Katalog Produk Pangan</h2>
             
-            <article>
+            <article data-kategori="beras">
                 <h3>Beras Kualitas Premium I</h3>
-                <p>Harga Eceran: Rp 16.500 / Kg</p>
-                <p>Status: Harga Naik</p>
-                <button type="button">Tambah ke Keranjang</button>
-            </article>
+                <figure>
+                    <!-- Placeholder gambar (alt wajib ada untuk aksesibilitas) -->
+                    <img src="placeholder-beras.jpg" alt="Karung beras premium 25kg" width="150" loading="lazy">
+                    <figcaption>Stok tersedia: 150 Karung</figcaption>
+                </figure>
+                
+                <dl>
+                    <dt>Harga Eceran</dt>
+                    <dd>Rp 16.500 / Kg</dd>
+                    
+                    <dt>Harga Grosir</dt>
+                    <dd>Rp 385.000 / Karung 25 Kg</dd>
+                </dl>
 
-            <article>
-                <h3>Bawang Merah Ukuran Sedang</h3>
-                <p>Harga Eceran: Rp 38.400 / Kg</p>
-                <p>Status: Harga Turun</p>
-                <button type="button">Tambah ke Keranjang</button>
+                <form action="#" method="POST">
+                    <input type="hidden" name="id_produk" value="1">
+                    <label for="qty-1">Jumlah:</label>
+                    <!-- Tipe number dengan batasan min dan max -->
+                    <input type="number" id="qty-1" name="quantity" min="1" max="150" value="1" required>
+                    <button type="submit">Tambah ke Keranjang</button>
+                </form>
             </article>
         </section>
 
+        <hr>
+
+        <!-- Seksi Keranjang Belanja Menggunakan Tabel Semantik -->
         <section id="keranjang">
-            <h2>Keranjang Belanja</h2>
+            <h2>Keranjang Belanja Anda</h2>
             
-            <ul>
-                <li>Beras Kualitas Premium I (1 Kg) - Rp 16.500</li>
-            </ul>
-            
-            <p><strong>Total Bayar: Rp 16.500</strong></p>
+            <table border="1" width="100%">
+                <caption>Rincian item yang akan di-checkout</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Nama Barang</th>
+                        <th scope="col">Harga Satuan</th>
+                        <th scope="col">Kuantitas</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Beras Kualitas Premium I</td>
+                        <td>Rp 16.500</td>
+                        <td>2</td>
+                        <td>Rp 33.000</td>
+                        <td><button type="button">Hapus</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="row" colspan="3" align="right">Total Bayar:</th>
+                        <td colspan="2"><strong>Rp 33.000</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
 
-            <form action="/proses-pesanan.php" method="POST">
+            <br>
+
+            <!-- Form Checkout dengan Datalist -->
+            <form action="/api/checkout" method="POST">
                 <fieldset>
-                    <legend>Data Pengiriman</legend>
+                    <legend>Informasi Pengiriman</legend>
                     
-                    <label for="nama">Nama Penerima:</label><br>
-                    <input type="text" id="nama" name="nama" required><br><br>
+                    <label for="nama_penerima">Nama Penerima:</label><br>
+                    <input type="text" id="nama_penerima" name="nama" required autocomplete="name"><br><br>
 
-                    <label for="alamat">Alamat Lengkap:</label><br>
-                    <textarea id="alamat" name="alamat" rows="3" required></textarea><br><br>
+                    <label for="kecamatan">Kecamatan (Tarakan):</label><br>
+                    <!-- Datalist memberikan opsi dropdown yang bisa diketik/dicari -->
+                    <input list="daftar-kecamatan" id="kecamatan" name="kecamatan" required>
+                    <datalist id="daftar-kecamatan">
+                        <option value="Tarakan Barat"></option>
+                        <option value="Tarakan Tengah"></option>
+                        <option value="Tarakan Timur"></option>
+                        <option value="Tarakan Utara"></option>
+                    </datalist><br><br>
 
-                    <button type="submit">Konfirmasi Pesanan</button>
+                    <label for="alamat_detail">Alamat Lengkap:</label><br>
+                    <textarea id="alamat_detail" name="alamat" rows="3" required></textarea><br><br>
+
+                    <label for="catatan">Catatan (Opsional):</label><br>
+                    <input type="text" id="catatan" name="catatan"><br><br>
+
+                    <button type="submit">Konfirmasi & Buat Pesanan</button>
                 </fieldset>
             </form>
         </section>
     </main>
 
+    <hr>
+
     <footer>
-        <p>&copy; 2026 Sembako Hub Tarakan - Proyek Individu Pemrograman Web</p>
+        <p>&copy; 2026 Sembako Hub. Proyek Pemrograman Web OBE - Universitas Borneo Tarakan.</p>
+        <address>
+            Kontak Dukungan: <a href="mailto:support@sembakohub.com">support@sembakohub.com</a>
+        </address>
     </footer>
 
 </body>
