@@ -1,33 +1,26 @@
-# Dashboard Informasi Harga Pangan Tarakan
+# Sembako Hub - Sistem Informasi & Prediksi Harga Pangan Tarakan
 
-Portal informasi layanan publik untuk memantau fluktuasi harga komoditas pangan di area pasar Kota Tarakan.
+Proyek Praktikum Pemrograman Web (OBE 2026) - Pertemuan 2
+Program Studi Sarjana Teknik Komputer, Universitas Borneo Tarakan
+Oleh: Ahmad Fauzan Al Ghifari (2440304012)
 
-## Cara Menjalankan melalui Laragon 5
+## Deskripsi Singkat
 
-1. Pastikan folder proyek `pemweb-obe` berada di direktori `c:\laragon\www\`.
-2. Buka aplikasi Laragon 5 dan klik Start All (pastikan layanan Apache berjalan).
-3. Akses tautan URL di bawah ini melalui web browser.
+Sembako Hub Tarakan adalah portal informasi harga pangan dan kalkulator estimasi belanja berbasis web yang dirancang menggunakan standar semantik HTML5 dan aksesibilitas dasar (WCAG 2.1). Sistem ini memfasilitasi pemantauan tren harga komoditas lokal bagi masyarakat umum.
 
-## URL
+## Cara Menjalankan Menggunakan Laragon 5
 
-* URL: [http://localhost/pemweb-obe/]
+1. Jalankan aplikasi Laragon dan klik **Start All**.
+2. Pastikan folder proyek berada di direktori: `C:\laragon\www\pemweb-obe` (atau menyesuaikan letak instalasi Anda).
+3. Buka browser dan akses URL: `http://localhost/pemweb-obe/`
 
-## Tugas OBE
+## Checklist Aksesibilitas Dasar
 
-| No. | Nama Request | Method | Status | Type |
-|:---:|---|:---:|:---:|---|
-| 1 | `swiper-bundle.min.css` | GET | 200 | `stylesheet` |
-| 2 | `UBT_bkkbn01.jpg` | GET | 200 | `webp` |
-| 3 | `imagesloaded.min.js?ver=5.0.0` | GET | 200 | `script` |
-| 4 | `...pxiDyp8kv8JHg...woff2` | GET | 200 | `woff2` |
-| 5 | `/css2?family=Poppins:wght@400;600;700&display=swap` | GET | 200 | `stylesheet` |
-
-## Modul 2
-
-| Indikator | Status | Keterangan Verifikasi |
-|---|---|---|
-| Deklarasi Bahasa (`lang="id"`) | Terpenuhi | Terpasang pada tag pembuka `<html>` untuk parser screen reader. |
-| Hierarki Heading | Terpenuhi | Memiliki 1 `<h1>`, 3 `<h2>` untuk tiap section, dan `<h3>` untuk article. Tidak ada heading yang melompat tingkat. |
-| Atribut Alt Gambar | Terpenuhi | Gambar informatif menyertakan deskripsi kontekstual; gambar dekoratif menggunakan `alt=""`. |
-| Label Form | Terpenuhi | Seluruh elemen `<select>` dan tombol terhubung secara eksplisit via `for` dan `id`. |
-| Navigasi Keyboard | Terpenuhi | Tab index mengikuti aliran visual dokumen alami tanpa keyboard trap; dilengkapi skip link ke `#main`. |
+| Parameter | Implementasi pada Kode | Status |
+| :--- | :--- | :--- |
+| **lang** | Menggunakan `<html lang="id">` untuk bahasa Indonesia. | ✓ |
+| **Heading** | Terstruktur runtut dari h1, h2, hingga h3 tanpa melompat. | ✓ |
+| **alt** | Gambar informatif memiliki deskripsi jelas, ikon dekoratif memakai `alt=""`. | ✓ |
+| **Label Form** | Setiap input terhubung dengan label via atribut `for` dan `id`. | ✓ |
+| **Teks link** | Deskriptif (misal: "Kalkulator Estimasi Belanja", bukan "klik di sini"). | ✓ |
+| **Keyboard** | Bisa dinavigasi menggunakan tombol Tab dan menyediakan *skip link*. | ✓ |
