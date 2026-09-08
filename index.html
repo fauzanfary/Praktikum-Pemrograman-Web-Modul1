@@ -1,51 +1,200 @@
-<section id="tabel-harga">
-  <h2>Tabel Detail Harga Pangan</h2>
-  
-  <!-- div pembungkus dengan tabindex="0" memungkinkan tabel digeser/di-scroll menggunakan keyboard panah jika layar kecil -->
-  <div style="overflow-x: auto;" tabindex="0" aria-labelledby="tabel-caption">
-    <table border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
-      <caption id="tabel-caption" style="caption-side: top; font-weight: bold; padding: 10px 0;">
-        Daftar Harga Komoditas Berdasarkan Pasar di Tarakan
-      </caption>
-      
-      <thead>
-        <tr style="background-color: #f2f2f2;">
-          <!-- scope="col" memberi tahu screen reader bahwa ini adalah header untuk kolom -->
-          <th scope="col" style="padding: 8px;">Komoditas</th>
-          <th scope="col" style="padding: 8px;">Lokasi Pasar</th>
-          <th scope="col" style="padding: 8px;">Harga (Rp)</th>
-          <th scope="col" style="padding: 8px;">Aksi</th>
-        </tr>
-      </thead>
-      
-      <tbody>
-        <tr>
-          <!-- scope="row" memberi tahu screen reader bahwa ini adalah header untuk baris -->
-          <th scope="row" style="padding: 8px;">Beras Kualitas Bawah I</th>
-          <td style="padding: 8px;">Pasar Gusher</td>
-          <td style="padding: 8px;">14.000 / Kg</td>
-          <td style="padding: 8px;">
-            <!-- Tombol ini secara otomatis dapat difokuskan oleh tombol Tab -->
-            <button type="button" aria-label="Lihat grafik harga beras di Pasar Gusher">Lihat Grafik</button>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" style="padding: 8px;">Bawang Merah</th>
-          <td style="padding: 8px;">Pasar Tenguyun</td>
-          <td style="padding: 8px;">35.000 / Kg</td>
-          <td style="padding: 8px;">
-            <button type="button" aria-label="Lihat grafik harga bawang merah di Pasar Tenguyun">Lihat Grafik</button>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" style="padding: 8px;">Cabai Rawit Merah</th>
-          <td style="padding: 8px;">Pasar Boom Panjang</td>
-          <td style="padding: 8px;">60.000 / Kg</td>
-          <td style="padding: 8px;">
-            <button type="button" aria-label="Lihat grafik harga cabai rawit di Pasar Boom Panjang">Lihat Grafik</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sistem Distribusi Sembako Terpadu Grosir dan Eceran Tarakan">
+    <title>Sembako Hub Tarakan</title>
+    <style>
+        /* CSS Dasar & Aksesibilitas */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f4f6f9; color: #333; }
+        .skip-link { position: absolute; top: -40px; left: 0; background: #c0392b; color: white; padding: 10px; z-index: 100; transition: top 0.3s; text-decoration: none; font-weight: bold; }
+        .skip-link:focus { top: 0; }
+        
+        /* Header PIHPS Style */
+        header { background-color: #1a5276; color: white; padding: 15px 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+        header h1 { margin: 0; font-size: 1.5em; }
+        nav { display: flex; gap: 15px; align-items: center; }
+        nav select, nav button { padding: 8px; border-radius: 4px; border: none; font-family: inherit; }
+        nav button { background-color: #f1c40f; font-weight: bold; cursor: pointer; color: #333; }
+        
+        /* Main Layout */
+        main { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+        section { margin-bottom: 40px; }
+        
+        /* Dasbor Informasi */
+        .dashboard-header { background-color: #2980b9; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        
+        /* Katalog Grid */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        article { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 4px solid #2980b9; }
+        article h3 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; font-size: 1.1em; }
+        
+        /* Harga & Tren */
+        .price { font-size: 1.4em; font-weight: bold; margin: 10px 0; }
+        .price.eceran { color: #27ae60; }
+        .price.grosir { color: #d35400; }
+        .trend { font-size: 0.85em; display: flex; align-items: center; gap: 5px; margin-bottom: 15px; }
+        .trend.down { color: #27ae60; }
+        .trend.up { color: #c0392b; }
+        
+        /* Tombol Beli */
+        .btn-buy { width: 100%; padding: 10px; border: none; border-radius: 4px; background-color: #2980b9; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-buy:hover { background-color: #1a5276; }
+        
+        /* Form Checkout */
+        .cart-panel { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .cart-list { list-style: none; padding: 0; margin-bottom: 20px; }
+        .cart-list li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        form { display: flex; flex-direction: column; gap: 10px; border-top: 2px dashed #ccc; padding-top: 20px; }
+        form label { font-weight: bold; }
+        form input, form button { padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        form button { background-color: #27ae60; color: white; font-weight: bold; cursor: pointer; border: none; font-size: 1em; }
+        
+        footer { text-align: center; padding: 20px; background: #e9ecef; color: #666; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#main" class="skip-link">Lewati ke konten utama</a>
+        <h1>Sembako Hub Tarakan</h1>
+        <nav aria-label="Navigasi utama">
+            <label for="roleSelector" style="color:white; font-size: 0.9em;">Akses Login:</label>
+            <select id="roleSelector" onchange="renderProducts()">
+                <option value="eceran">Masyarakat (Eceran)</option>
+                <option value="grosir">Warung (Grosir B2B)</option>
+            </select>
+            <button type="button" onclick="document.getElementById('checkout').scrollIntoView({behavior: 'smooth'});">
+                🛒 <span id="cartCount">0</span> Item
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="dashboard-header" aria-labelledby="judul-dashboard">
+            <h2 id="judul-dashboard">Katalog Harga & Pemesanan Online</h2>
+            <p id="roleDescription">Menampilkan harga eceran harian untuk rumah tangga.</p>
+        </section>
+
+        <section id="katalog" aria-label="Daftar Komoditas">
+            <div class="product-grid" id="productContainer">
+                <!-- Produk di-render oleh JavaScript -->
+            </div>
+        </section>
+
+        <section id="checkout" class="cart-panel" aria-labelledby="judul-keranjang">
+            <h2 id="judul-keranjang">Keranjang Belanja</h2>
+            <ul class="cart-list" id="cartItems" aria-live="polite">
+                <li>Belum ada barang di keranjang.</li>
+            </ul>
+            <h3 style="text-align: right; color: #d35400;">Total Bayar: Rp <span id="cartTotal">0</span></h3>
+            
+            <form onsubmit="prosesPesanan(event)">
+                <label for="alamat">Alamat Pengiriman</label>
+                <input id="alamat" name="alamat" type="text" placeholder="Contoh: Jl. Mulawarman, Tarakan Barat" required>
+                <button type="submit">Proses Pesanan</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Sembako Hub Tarakan</p>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, name: "Beras Kualitas Premium I", eceranPrice: 16500, grosirPrice: 385000, eceranUnit: "Per Kg", grosirUnit: "Karung 25 Kg", trend: "up", trendValue: "Rp 50" },
+            { id: 2, name: "Bawang Merah Ukuran Sedang", eceranPrice: 38400, grosirPrice: 360000, eceranUnit: "Per Kg", grosirUnit: "Karung 10 Kg", trend: "down", trendValue: "Rp -150" },
+            { id: 3, name: "Cabai Rawit Merah", eceranPrice: 83200, grosirPrice: 400000, eceranUnit: "Per Kg", grosirUnit: "Kardus 5 Kg", trend: "up", trendValue: "Rp 1.000" }
+        ];
+
+        let cart = [];
+        const formatRp = (angka) => new Intl.NumberFormat('id-ID').format(angka);
+
+        function renderProducts() {
+            const role = document.getElementById("roleSelector").value;
+            const container = document.getElementById("productContainer");
+            const roleDesc = document.getElementById("roleDescription");
+            
+            container.innerHTML = "";
+            
+            if(role === 'grosir') {
+                roleDesc.innerText = "Mode B2B: Menampilkan harga partai besar khusus warung terdaftar.";
+            } else {
+                roleDesc.innerText = "Mode B2C: Menampilkan harga eceran harian untuk rumah tangga.";
+            }
+
+            products.forEach(p => {
+                const isGrosir = role === 'grosir';
+                const price = isGrosir ? p.grosirPrice : p.eceranPrice;
+                const unit = isGrosir ? p.grosirUnit : p.eceranUnit;
+                const priceClass = isGrosir ? 'grosir' : 'eceran';
+                const trendIcon = p.trend === 'up' ? '▲' : '▼';
+
+                const article = document.createElement('article');
+                article.innerHTML = `
+                    <h3>${p.name}</h3>
+                    <div class="price ${priceClass}">Rp ${formatRp(price)}</div>
+                    <div class="trend ${p.trend}">${trendIcon} ${p.trendValue}</div>
+                    <div style="font-size: 0.9em; margin-bottom: 15px; color: #7f8c8d;">Satuan: ${unit}</div>
+                    <button class="btn-buy" onclick="addToCart(${p.id}, '${p.name}', ${price}, '${unit}')">
+                        + Masukkan Keranjang
+                    </button>
+                `;
+                container.appendChild(article);
+            });
+            
+            // Reset keranjang saat ganti mode agar tidak ada manipulasi harga silang
+            cart = [];
+            updateCartUI();
+        }
+
+        function addToCart(id, name, price, unit) {
+            cart.push({ id, name, price, unit });
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItems = document.getElementById("cartItems");
+            const cartCount = document.getElementById("cartCount");
+            const cartTotal = document.getElementById("cartTotal");
+
+            cartItems.innerHTML = "";
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = "<li>Belum ada barang di keranjang.</li>";
+            } else {
+                cart.forEach(item => {
+                    total += item.price;
+                    cartItems.innerHTML += `
+                        <li>
+                            <span>${item.name} (${item.unit})</span>
+                            <strong>Rp ${formatRp(item.price)}</strong>
+                        </li>
+                    `;
+                });
+            }
+
+            cartCount.innerText = cart.length;
+            cartTotal.innerText = formatRp(total);
+        }
+
+        function prosesPesanan(event) {
+            event.preventDefault(); // Mencegah reload halaman
+            if(cart.length === 0) {
+                alert("Keranjang masih kosong!");
+                return;
+            }
+            const alamat = document.getElementById("alamat").value;
+            alert("Pesanan berhasil diproses untuk alamat: " + alamat + "\\nSilakan cek riwayat pesanan.");
+            cart = [];
+            document.getElementById("alamat").value = "";
+            updateCartUI();
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
