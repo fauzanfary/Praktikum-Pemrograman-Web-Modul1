@@ -31,3 +31,5 @@ Pada tahap awal proyek, telah dilakukan inspeksi jaringan untuk memahami komunik
 
 **2. Refleksi Praktikum**
 Melalui tugas ini, saya lebih memahami alur komunikasi protokol HTTP/HTTPS serta mekanisme *request-response* saat peramban memuat berbagai aset web secara terpisah. Saya juga telah berhasil mempraktikkan fondasi *version control* menggunakan Git, mulai dari inisialisasi (*init*), rekam perubahan (*commit*), hingga pengunggahan (*push*) ke GitHub. Kendala utama berupa banyaknya *request* yang bertumpuk pada *developer tools* dapat diselesaikan dengan memfilter *header* secara spesifik untuk memastikan tidak ada data sensitif yang terekam.
+
+<!-- SUKES LANCAR REZEKI -->
