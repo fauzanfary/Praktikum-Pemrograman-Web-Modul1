@@ -1,0 +1,241 @@
+/* Custom properties sesuai Modul 3 */
+:root {
+    --space-1: 0.5rem;
+    --space-2: 1rem;
+    --space-3: 1.5rem;
+    --brand: #059669; /* Hijau yang cocok untuk tema agrikultur/pasar */
+    --brand-hover: #047857;
+    --surface: #ffffff;
+    --background: #f3f4f6;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --border: #e5e7eb;
+    --radius: 0.75rem;
+}
+
+/* CSS Reset & Box Model */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--background);
+}
+
+.container {
+    width: min(100% - 2rem, 80rem); /* Max-width relatif */
+    margin-inline: auto;
+    padding: var(--space-2) 0;
+}
+
+/* Header & Navigasi dengan Flexbox */
+header {
+    background-color: var(--surface);
+    padding: var(--space-3);
+    border-radius: var(--radius);
+    margin-bottom: var(--space-3);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    align-items: center;
+    text-align: center;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap; /* Navigasi wrap jika ruang sempit tanpa scroll horizontal */
+    gap: var(--space-2);
+    list-style: none;
+    justify-content: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--brand);
+    font-weight: 600;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius);
+    transition: background-color 0.2s;
+}
+
+nav a:hover {
+    background-color: #ecfdf5;
+}
+
+/* Layout Utama CSS Grid - Pendekatan Mobile-First (1 Kolom) */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+}
+
+/* Komponen Card Reusable */
+.card {
+    background-color: var(--surface);
+    padding: var(--space-3);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.card h2 {
+    margin-bottom: var(--space-2);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    border-bottom: 2px solid var(--brand);
+    display: inline-block;
+    padding-bottom: var(--space-1);
+}
+
+/* Tipografi dan Gambar */
+.meta-text {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-bottom: var(--space-2);
+}
+
+figure {
+    margin: var(--space-2) 0;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+}
+
+figcaption {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: var(--space-1);
+}
+
+blockquote {
+    border-left: 4px solid var(--brand);
+    padding-left: var(--space-2);
+    margin: var(--space-2) 0;
+    font-style: italic;
+    color: var(--text-light);
+    background-color: #f9fafb;
+    padding: var(--space-2);
+    border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* Tabel Responsif */
+.table-responsive {
+    overflow-x: auto; /* Mencegah overflow horizontal pada layar kecil */
+    margin-top: var(--space-2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+th, td {
+    padding: var(--space-2);
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+caption {
+    font-weight: bold;
+    margin-bottom: var(--space-1);
+}
+
+/* Badge Status */
+.badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+.danger { background-color: #fee2e2; color: #991b1b; }
+.success { background-color: #d1fae5; color: #065f46; }
+
+/* Form Elements */
+fieldset {
+    border: 1px solid var(--border);
+    padding: var(--space-3);
+    border-radius: var(--radius);
+}
+
+legend {
+    font-weight: 600;
+    padding: 0 var(--space-1);
+}
+
+.form-group {
+    margin-bottom: var(--space-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+input, select {
+    padding: var(--space-1);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) / 2);
+    font-family: inherit;
+}
+
+.btn {
+    background-color: var(--brand);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: calc(var(--radius) / 2);
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    margin-top: var(--space-2);
+}
+
+.btn:hover {
+    background-color: var(--brand-hover);
+}
+
+/* Aksesibilitas: Focus State terlihat jelas */
+a:focus-visible, 
+button:focus-visible, 
+input:focus-visible, 
+select:focus-visible {
+    outline: 3px solid var(--brand);
+    outline-offset: 3px;
+}
+
+footer {
+    text-align: center;
+    padding: var(--space-3);
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+/* Media Query untuk Desktop / Layar Lebar (Breakpoint 64rem / 1024px) */
+@media (min-width: 64rem) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+    
+    /* Mengubah Grid menjadi 3 kolom sesuai syarat Latihan modul */
+    .main-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+
+    /* Memaksa area Berita membentang di perangkat tablet (opsional jika 2 kolom) 
+       Tapi untuk 3 kolom di desktop, Berita ambil 2 porsi (2fr), 
+       Katalog 1 porsi (1fr), Kalkulator 1 porsi (1fr). */
+}
