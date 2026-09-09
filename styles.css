@@ -1,52 +1,297 @@
-/* 1. Box Model dan Reset Margin/Padding */
-*, *::before, *::after {
-    box-sizing: border-box;
+/* Custom Properties dengan Palet Modern & UI/UX Variables */
+:root {
+    --primary: #10b981;
+    --primary-dark: #059669;
+    --accent: #f59e0b;
+    --bg-body: #f8fafc;
+    --bg-surface: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --radius-md: 1rem;
+    --radius-sm: 0.5rem;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+    --shadow-hover: 0 10px 15px -3px rgba(0,0,0,0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Reset Modern & Keterbacaan */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* 2. Pengaturan Aksesibilitas dan Perilaku Dokumen */
-html {
-    scroll-behavior: smooth;
-}
-
-/* 3. Tipografi dan Keterbacaan Dasar */
 body {
+    font-family: system-ui, -apple-system, sans-serif;
     line-height: 1.6;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-body);
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
 }
 
-/* 4. Reset Elemen Media (Responsif secara Default) */
-img, picture, video, canvas, svg {
-    display: block;
-    max-width: 100%;
+.container {
+    width: min(100% - 2rem, 80rem);
+    margin-inline: auto;
+    padding: 2rem 0;
+}
+
+/* Header & Navigasi (Sticky & Flexbox) */
+header {
+    background-color: var(--bg-surface);
+    padding: 1.5rem 2rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    position: sticky;
+    top: 1rem;
+    z-index: 100;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    letter-spacing: -0.025em;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    justify-content: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+nav a:hover {
+    color: var(--primary-dark);
+    background-color: #ecfdf5;
+}
+
+/* Layout Grid Utama (Mobile-First) */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+/* Komponen Card dengan Efek Hover (UI/UX) */
+.card {
+    background-color: var(--bg-surface);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+}
+
+.card h2 {
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card h2::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+    margin-left: 1rem;
+}
+
+/* Tipografi & Konten Pendukung */
+.meta-text {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+figure {
+    margin: 1.5rem 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+figure img {
+    width: 100%;
     height: auto;
+    display: block;
+    transition: var(--transition);
 }
 
-/* 5. Pewarisan Font pada Elemen Interaktif */
-input, button, textarea, select {
-    font: inherit;
+figure:hover img {
+    transform: scale(1.02);
 }
 
-/* 6. Penanganan Teks Panjang */
-p, h1, h2, h3, h4, h5, h6 {
-    overflow-wrap: break-word;
+figcaption {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 0.75rem;
+    font-style: italic;
 }
 
-/* 7. Aksesibilitas: Mengurangi animasi bagi pengguna yang membutuhkannya */
-@media (prefers-reduced-motion: reduce) {
-  html:focus-within {
-   scroll-behavior: auto;
-  }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+blockquote {
+    border-left: 4px solid var(--primary);
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--text-main);
+    background-color: #f0fdf4;
+    padding: 1.5rem;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* Tabel Data Modern */
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    background-color: var(--bg-surface);
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* Badge Status */
+.badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.danger { background-color: #fee2e2; color: #991b1b; }
+.success { background-color: #d1fae5; color: #065f46; }
+
+/* Form Interaktif */
+fieldset {
+    border: none;
+    padding: 0;
+}
+
+legend {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+input, select {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: #f8fafc;
+    transition: var(--transition);
+}
+
+input:focus, select:focus {
+    background-color: var(--bg-surface);
+    border-color: var(--primary);
+}
+
+/* Tombol Animasi */
+.btn {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.875rem 1.5rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    transition: var(--transition);
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.btn:hover {
+    background-color: var(--primary-dark);
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Kepatuhan Aksesibilitas: Focus State */
+a:focus-visible, 
+button:focus-visible, 
+input:focus-visible, 
+select:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-top: 2rem;
+}
+
+/* Media Query untuk Desktop / Layar Lebar */
+@media (min-width: 64rem) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .main-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+        align-items: start;
+    }
 }
