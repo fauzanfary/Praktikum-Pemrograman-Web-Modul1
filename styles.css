@@ -81,6 +81,41 @@ nav a:hover {
     background-color: #ecfdf5;
 }
 
+/* Hero Section (Diadaptasi dari Modul) */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: var(--bg-surface);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    margin-bottom: 2rem;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-section h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--primary-dark);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+}
+
+.hero-section p {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    max-width: 600px;
+}
+
+.btn-hero {
+    width: auto;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    display: inline-block;
+}
+
 /* Layout Grid Utama (Mobile-First) */
 .main-grid {
     display: grid;
