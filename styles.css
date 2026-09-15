@@ -1,41 +1,41 @@
-/* Custom Properties - Tema PIHPS (Dark Dashboard) */
+/* Custom Properties - Modern Light UI */
 :root {
-    --primary-blue: #1c4c7c;     /* Latar belakang utama dashboard */
-    --secondary-blue: #2a5b8e;   /* Warna elemen card/filter */
-    --accent-blue: #3b7abf;      /* Warna hover/border */
-    --bg-white: #ffffff;         /* Header putih */
-    --text-dark: #333333;        /* Teks di header */
-    --text-light: #ffffff;       /* Teks di area dashboard */
-    --trend-up: #ef4444;         /* Merah untuk naik (standar harga sembako) */
-    --trend-down: #10b981;       /* Hijau untuk turun */
-    --trend-neutral: #3b82f6;    /* Biru untuk stabil */
-    --radius: 0.5rem;
+    --primary: #059669; /* Warna hijau zamrud yang elegan */
+    --surface: #ffffff;
+    --background: #f3f4f6; /* Latar abu-abu terang agar 'card' putih lebih menonjol */
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --radius: 0.75rem;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-* {
+/* Reset Base (Box Model & Spacing) */
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: system-ui, sans-serif;
-    background-color: var(--primary-blue);
-    color: var(--text-light);
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--background);
+    color: var(--text-main);
     line-height: 1.5;
 }
 
 .container {
-    width: min(100% - 2rem, 85rem);
+    width: min(100% - 2rem, 72rem);
     margin-inline: auto;
 }
 
-/* Header (Flexbox) */
+/* 1. Header menggunakan Flexbox */
 .header-dashboard {
-    background-color: var(--bg-white);
-    color: var(--text-dark);
-    padding: 1rem 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: var(--surface);
+    padding: 1.25rem 0;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 2rem;
 }
 
 .header-container {
@@ -47,8 +47,9 @@ body {
 }
 
 .header-dashboard h1 {
+    color: var(--primary);
     font-size: 1.5rem;
-    color: var(--primary-blue);
+    font-weight: 700;
 }
 
 .header-dashboard nav ul {
@@ -59,30 +60,34 @@ body {
 
 .header-dashboard nav a {
     text-decoration: none;
-    color: var(--text-dark);
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.header-dashboard nav a:hover {
+    color: var(--primary);
+}
+
+/* 2. Dashboard Title */
+.dashboard-title {
+    font-size: 1.25rem;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
     font-weight: 600;
 }
 
-/* Area Dashboard Utama */
-.dashboard-wrapper {
-    padding: 2rem 0;
-}
-
-.dashboard-title {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1.5rem;
-    font-weight: 400;
-}
-
-/* Filter Section (CSS Grid) */
+/* 3. Filter Section menggunakan CSS Grid */
 .filter-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Grid responsif: minimal 150px, selebihnya mengisi ruang */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
-    background-color: var(--secondary-blue);
+    background-color: var(--surface);
     padding: 1.5rem;
     border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
     margin-bottom: 2rem;
 }
 
@@ -93,85 +98,98 @@ body {
 }
 
 .filter-group label {
-    font-size: 0.85rem;
-    color: #cbd5e1;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
 }
 
 .filter-group select, 
 .filter-group input {
-    padding: 0.5rem;
-    border: 1px solid var(--accent-blue);
-    border-radius: 4px;
-    background-color: var(--bg-white);
-    color: var(--text-dark);
-    font-size: 0.9rem;
+    padding: 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 0.375rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    background-color: var(--background);
 }
 
-/* Visualization / Map Placeholder */
+/* 4. Visualization Placeholder */
 .visualization-section {
     margin-bottom: 2rem;
 }
 
 .map-placeholder {
-    width: 100%;
-    height: 350px;
-    background-color: var(--secondary-blue);
+    height: 300px;
+    background-color: #e5e7eb;
     border-radius: var(--radius);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px dashed var(--accent-blue);
-    color: #94a3b8;
+    color: var(--text-muted);
+    border: 2px dashed #9ca3af;
 }
 
-/* Data Cards Grid (CSS Grid 4 Kolom) */
+/* 5. Data Cards menggunakan CSS Grid */
 .data-grid {
     display: grid;
-    /* Grid 4 kolom untuk layar besar, menyesuaikan untuk layar kecil */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+    /* Grid otomatis: kolom minimal selebar 220px */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
 }
 
 .data-card {
-    background-color: var(--secondary-blue);
-    padding: 1.25rem;
+    background-color: var(--surface);
+    padding: 1.5rem;
     border-radius: var(--radius);
-    border-top: 4px solid var(--accent-blue);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    transition: transform 0.2s;
+    gap: 0.5rem;
+    /* Aksen garis atas pada card */
+    border-top: 4px solid var(--primary); 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .data-card:hover {
     transform: translateY(-3px);
-    background-color: #32669e;
+    box-shadow: var(--shadow-md);
 }
 
 .data-card h3 {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #cbd5e1;
-    min-height: 2.5rem; /* Menjaga keseragaman tinggi judul */
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    line-height: 1.3;
 }
 
 .data-card .price {
     font-size: 1.5rem;
     font-weight: 700;
+    color: var(--text-main);
 }
 
 .data-card .price span {
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: #94a3b8;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: normal;
 }
 
 .trend {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    display: inline-block;
+    margin-top: auto; /* Mendorong tren ke bagian paling bawah card */
+    padding-top: 0.5rem;
 }
 
-.trend.up { color: var(--trend-up); }
-.trend.down { color: var(--trend-down); }
-.trend.neutral { color: var(--trend-neutral); }
+/* Status Tren */
+.trend.up { color: #dc2626; } /* Merah jika harga naik */
+.trend.down { color: #16a34a; } /* Hijau jika harga turun */
+.trend.neutral { color: #2563eb; } /* Biru jika harga stabil */
+
+/* 6. Aksesibilitas (Focus State) untuk Modul 3 */
+*:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
