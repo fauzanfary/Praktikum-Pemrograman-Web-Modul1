@@ -1,332 +1,154 @@
-/* Custom Properties dengan Palet Modern & UI/UX Variables */
-:root {
-    --primary: #10b981;
-    --primary-dark: #059669;
-    --accent: #f59e0b;
-    --bg-body: #f8fafc;
-    --bg-surface: #ffffff;
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --border: #e2e8f0;
-    --radius-md: 1rem;
-    --radius-sm: 0.5rem;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-    --shadow-hover: 0 10px 15px -3px rgba(0,0,0,0.1);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal Informasi dan Kalkulator Harga Sembako Tarakan">
+    <title>Sembako Hub Tarakan - Info & Prediksi</title>
+    <!-- Menghubungkan file CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sembako Hub Tarakan</h1>
+            <nav aria-label="Navigasi Utama">
+                <ul>
+                    <li><a href="#berita-prediksi">Berita & Prediksi</a></li>
+                    <li><a href="#katalog-harga">Katalog Harga</a></li>
+                    <li><a href="#kalkulator">Kalkulator Belanja</a></li>
+                </ul>
+            </nav>
+        </header>
 
-/* Reset Modern & Keterbacaan */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h2>Pantau Harga Sembako Tarakan Real-time</h2>
+            <p>Dapatkan informasi terkini seputar harga kebutuhan pokok, prediksi tren pasar, dan kalkulasi estimasi belanja Anda di satu portal terintegrasi.</p>
+            <a href="#kalkulator" class="btn btn-hero">Coba Kalkulator Belanja</a>
+        </section>
 
-body {
-    font-family: system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
-    color: var(--text-main);
-    background-color: var(--bg-body);
-    -webkit-font-smoothing: antialiased;
-}
+        <!-- Elemen grid-layout ditambahkan untuk memenuhi Latihan Grid 3 Kolom -->
+        <main class="main-grid">
+            <!-- Seksi Berita dan Prediksi -->
+            <section id="berita-prediksi" class="card">
+                <h2>Berita & Prediksi Harga (1 Minggu ke Depan)</h2>
+                <article>
+                    <header>
+                        <h3>Prediksi Lonjakan Harga Cabai Rawit Jelang Musim Hujan</h3>
+                        <p class="meta-text">Dipublikasikan pada: <time datetime="2026-09-08">08 September 2026</time> oleh Analis Pasar</p>
+                    </header>
+                    
+                    <figure>
+                        <img src="images.jpg" alt="Petugas meninjau dinamika harga pangan lokal di pasar Tarakan" loading="lazy">
+                        <figcaption>Dinamika Harga Pangan Lokal: Komoditas Cabai Merah di Tarakan Mengalami Kenaikan.</figcaption>
+                    </figure>
 
-.container {
-    width: min(100% - 2rem, 80rem);
-    margin-inline: auto;
-    padding: 2rem 0;
-}
+                    <p>Pasokan cabai rawit dari luar daerah Tarakan diprediksi akan mengalami keterlambatan akibat cuaca buruk di perairan.</p>
+                    <blockquote>
+                        "Kami memprediksi dalam 7 hari ke depan, harga cabai rawit merah akan merangkak naik hingga menyentuh Rp 95.000 per Kg." - Dinas Perdagangan.
+                    </blockquote>
+                    
+                    <div class="table-responsive">
+                        <table>
+                            <caption>Proyeksi Harga Cabai Rawit (09 - 15 September 2026)</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Komoditas</th>
+                                    <th scope="col">Harga Saat Ini</th>
+                                    <th scope="col">Prediksi Puncak (1 Minggu)</th>
+                                    <th scope="col">Status Tren</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cabai Rawit Merah</td>
+                                    <td>Rp 83.200 / Kg</td>
+                                    <td>Rp 95.000 / Kg</td>
+                                    <td><span class="badge danger">Naik Signifikan</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Bawang Merah</td>
+                                    <td>Rp 38.400 / Kg</td>
+                                    <td>Rp 37.000 / Kg</td>
+                                    <td><span class="badge success">Turun Stabil</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
 
-/* Header & Navigasi (Sticky & Flexbox) */
-header {
-    background-color: var(--bg-surface);
-    padding: 1.5rem 2rem;
-    border-radius: var(--radius-md);
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-    position: sticky;
-    top: 1rem;
-    z-index: 100;
-}
+            <!-- Seksi Katalog Harga -->
+            <section id="katalog-harga" class="card">
+                <h2>Katalog Harga Pangan Hari Ini</h2>
+                <dl class="katalog-list">
+                    <dt><strong>Beras Kualitas Premium I</strong></dt>
+                    <dd>Harga per Kg: Rp 16.500</dd>
+                    
+                    <dt><strong>Minyak Goreng Kemasan</strong></dt>
+                    <dd>Harga per Liter: Rp 18.000</dd>
+                </dl>
+            </section>
 
-header h1 {
-    font-size: 1.5rem;
-    color: var(--primary-dark);
-    letter-spacing: -0.025em;
-}
+            <!-- Seksi Kalkulator Pengganti Keranjang -->
+            <section id="kalkulator" class="card">
+                <h2>Kalkulator Estimasi Belanja</h2>
+                <p>Gunakan alat ini untuk menghitung perkiraan pengeluaran belanja Anda di pasar.</p>
+                
+                <form action="#" method="GET">
+                    <fieldset>
+                        <legend>Pilih Barang dan Kuantitas</legend>
+                        
+                        <div class="form-group">
+                            <label for="item_1">Pilih Komoditas:</label>
+                            <select id="item_1" name="item_1">
+                                <option value="16500">Beras Premium (Rp 16.500)</option>
+                                <option value="38400">Bawang Merah (Rp 38.400)</option>
+                                <option value="18000">Minyak Goreng (Rp 18.000)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="qty_1">Jumlah (Kg/Liter):</label>
+                            <input type="number" id="qty_1" name="qty_1" min="1" value="1" required>
+                        </div>
+                        
+                        <button type="submit" class="btn">Hitung Subtotal</button>
+                    </fieldset>
+                </form>
 
-nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    list-style: none;
-    justify-content: center;
-}
+                <div class="table-responsive" style="margin-top: 1rem;">
+                    <table>
+                        <caption>Hasil Perhitungan Estimasi</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Komoditas</th>
+                                <th scope="col">Kuantitas</th>
+                                <th scope="col">Estimasi Biaya</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Beras Premium</td>
+                                <td>2 Kg</td>
+                                <td>Rp 33.000</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="row" colspan="2" style="text-align: right;">Total Perkiraan:</th>
+                                <td><strong>Rp 33.000</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+        </main>
 
-nav a {
-    text-decoration: none;
-    color: var(--text-muted);
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
-}
-
-nav a:hover {
-    color: var(--primary-dark);
-    background-color: #ecfdf5;
-}
-
-/* Hero Section (Diadaptasi dari Modul) */
-.hero-section {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    background-color: var(--bg-surface);
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    margin-bottom: 2rem;
-    align-items: center;
-    text-align: center;
-}
-
-.hero-section h2 {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    color: var(--primary-dark);
-    letter-spacing: -0.025em;
-    line-height: 1.2;
-}
-
-.hero-section p {
-    font-size: 1.125rem;
-    color: var(--text-muted);
-    max-width: 600px;
-}
-
-.btn-hero {
-    width: auto;
-    padding: 1rem 2rem;
-    text-decoration: none;
-    display: inline-block;
-}
-
-/* Layout Grid Utama (Mobile-First) */
-.main-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-}
-
-/* Komponen Card dengan Efek Hover (UI/UX) */
-.card {
-    background-color: var(--bg-surface);
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border);
-    transition: var(--transition);
-}
-
-.card:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-4px);
-}
-
-.card h2 {
-    margin-bottom: 1.5rem;
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-    color: var(--text-main);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.card h2::after {
-    content: "";
-    flex: 1;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
-    margin-left: 1rem;
-}
-
-/* Tipografi & Konten Pendukung */
-.meta-text {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    margin-bottom: 1rem;
-}
-
-figure {
-    margin: 1.5rem 0;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-}
-
-figure img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: var(--transition);
-}
-
-figure:hover img {
-    transform: scale(1.02);
-}
-
-figcaption {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    text-align: center;
-    margin-top: 0.75rem;
-    font-style: italic;
-}
-
-blockquote {
-    border-left: 4px solid var(--primary);
-    margin: 1.5rem 0;
-    font-style: italic;
-    color: var(--text-main);
-    background-color: #f0fdf4;
-    padding: 1.5rem;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-}
-
-/* Tabel Data Modern */
-.table-responsive {
-    overflow-x: auto;
-    margin-top: 1.5rem;
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-sm);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-    background-color: var(--bg-surface);
-}
-
-th, td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-}
-
-th {
-    background-color: #f8fafc;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-}
-
-tbody tr:hover {
-    background-color: #f1f5f9;
-}
-
-/* Badge Status */
-.badge {
-    padding: 0.35rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-.danger { background-color: #fee2e2; color: #991b1b; }
-.success { background-color: #d1fae5; color: #065f46; }
-
-/* Form Interaktif */
-fieldset {
-    border: none;
-    padding: 0;
-}
-
-legend {
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--text-main);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-label {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text-muted);
-}
-
-input, select {
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-family: inherit;
-    font-size: 1rem;
-    background-color: #f8fafc;
-    transition: var(--transition);
-}
-
-input:focus, select:focus {
-    background-color: var(--bg-surface);
-    border-color: var(--primary);
-}
-
-/* Tombol Animasi */
-.btn {
-    background-color: var(--primary);
-    color: white;
-    padding: 0.875rem 1.5rem;
-    border: none;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-weight: 600;
-    width: 100%;
-    transition: var(--transition);
-    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
-}
-
-.btn:hover {
-    background-color: var(--primary-dark);
-    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);
-    transform: translateY(-2px);
-}
-
-/* Kepatuhan Aksesibilitas: Focus State */
-a:focus-visible, 
-button:focus-visible, 
-input:focus-visible, 
-select:focus-visible {
-    outline: 3px solid var(--accent);
-    outline-offset: 2px;
-}
-
-footer {
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-muted);
-    font-size: 0.875rem;
-    margin-top: 2rem;
-}
-
-/* Media Query untuk Desktop / Layar Lebar */
-@media (min-width: 64rem) {
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    
-    .main-grid {
-        grid-template-columns: 2fr 1fr 1fr;
-        align-items: start;
-    }
-}
+        <footer>
+            <p>&copy; 2026 Sembako Hub Tarakan - Portal Informasi Publik</p>
+        </footer>
+    </div>
+</body>
+</html>
