@@ -3,152 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portal Informasi dan Kalkulator Harga Sembako Tarakan">
-    <title>Sembako Hub Tarakan - Info & Prediksi</title>
-    <!-- Menghubungkan file CSS -->
+    <title>Sembako Hub Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Sembako Hub Tarakan</h1>
+    <!-- Header (Putih seperti PIHPS) -->
+    <header class="header-dashboard">
+        <div class="container header-container">
+            <h1>Sembako Hub <span>Tarakan</span></h1>
             <nav aria-label="Navigasi Utama">
                 <ul>
-                    <li><a href="#berita-prediksi">Berita & Prediksi</a></li>
-                    <li><a href="#katalog-harga">Katalog Harga</a></li>
-                    <li><a href="#kalkulator">Kalkulator Belanja</a></li>
+                    <li><a href="#">Beranda</a></li>
+                    <li><a href="#">Tabel Harga</a></li>
+                    <li><a href="#">Informasi</a></li>
                 </ul>
             </nav>
-        </header>
+        </div>
+    </header>
 
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <h2>Pantau Harga Sembako Tarakan Real-time</h2>
-            <p>Dapatkan informasi terkini seputar harga kebutuhan pokok, prediksi tren pasar, dan kalkulasi estimasi belanja Anda di satu portal terintegrasi.</p>
-            <a href="#kalkulator" class="btn btn-hero">Coba Kalkulator Belanja</a>
-        </section>
+    <main class="dashboard-wrapper">
+        <div class="container">
+            <h2 class="dashboard-title">Informasi Harga Pangan Daerah Tarakan</h2>
 
-        <!-- Elemen grid-layout ditambahkan untuk memenuhi Latihan Grid 3 Kolom -->
-        <main class="main-grid">
-            <!-- Seksi Berita dan Prediksi -->
-            <section id="berita-prediksi" class="card">
-                <h2>Berita & Prediksi Harga (1 Minggu ke Depan)</h2>
-                <article>
-                    <header>
-                        <h3>Prediksi Lonjakan Harga Cabai Rawit Jelang Musim Hujan</h3>
-                        <p class="meta-text">Dipublikasikan pada: <time datetime="2026-09-08">08 September 2026</time> oleh Analis Pasar</p>
-                    </header>
-                    
-                    <figure>
-                        <img src="images.jpg" alt="Petugas meninjau dinamika harga pangan lokal di pasar Tarakan" loading="lazy">
-                        <figcaption>Dinamika Harga Pangan Lokal: Komoditas Cabai Merah di Tarakan Mengalami Kenaikan.</figcaption>
-                    </figure>
-
-                    <p>Pasokan cabai rawit dari luar daerah Tarakan diprediksi akan mengalami keterlambatan akibat cuaca buruk di perairan.</p>
-                    <blockquote>
-                        "Kami memprediksi dalam 7 hari ke depan, harga cabai rawit merah akan merangkak naik hingga menyentuh Rp 95.000 per Kg." - Dinas Perdagangan.
-                    </blockquote>
-                    
-                    <div class="table-responsive">
-                        <table>
-                            <caption>Proyeksi Harga Cabai Rawit (09 - 15 September 2026)</caption>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Komoditas</th>
-                                    <th scope="col">Harga Saat Ini</th>
-                                    <th scope="col">Prediksi Puncak (1 Minggu)</th>
-                                    <th scope="col">Status Tren</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Cabai Rawit Merah</td>
-                                    <td>Rp 83.200 / Kg</td>
-                                    <td>Rp 95.000 / Kg</td>
-                                    <td><span class="badge danger">Naik Signifikan</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Bawang Merah</td>
-                                    <td>Rp 38.400 / Kg</td>
-                                    <td>Rp 37.000 / Kg</td>
-                                    <td><span class="badge success">Turun Stabil</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </article>
-            </section>
-
-            <!-- Seksi Katalog Harga -->
-            <section id="katalog-harga" class="card">
-                <h2>Katalog Harga Pangan Hari Ini</h2>
-                <dl class="katalog-list">
-                    <dt><strong>Beras Kualitas Premium I</strong></dt>
-                    <dd>Harga per Kg: Rp 16.500</dd>
-                    
-                    <dt><strong>Minyak Goreng Kemasan</strong></dt>
-                    <dd>Harga per Liter: Rp 18.000</dd>
-                </dl>
-            </section>
-
-            <!-- Seksi Kalkulator Pengganti Keranjang -->
-            <section id="kalkulator" class="card">
-                <h2>Kalkulator Estimasi Belanja</h2>
-                <p>Gunakan alat ini untuk menghitung perkiraan pengeluaran belanja Anda di pasar.</p>
-                
-                <form action="#" method="GET">
-                    <fieldset>
-                        <legend>Pilih Barang dan Kuantitas</legend>
-                        
-                        <div class="form-group">
-                            <label for="item_1">Pilih Komoditas:</label>
-                            <select id="item_1" name="item_1">
-                                <option value="16500">Beras Premium (Rp 16.500)</option>
-                                <option value="38400">Bawang Merah (Rp 38.400)</option>
-                                <option value="18000">Minyak Goreng (Rp 18.000)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="qty_1">Jumlah (Kg/Liter):</label>
-                            <input type="number" id="qty_1" name="qty_1" min="1" value="1" required>
-                        </div>
-                        
-                        <button type="submit" class="btn">Hitung Subtotal</button>
-                    </fieldset>
-                </form>
-
-                <div class="table-responsive" style="margin-top: 1rem;">
-                    <table>
-                        <caption>Hasil Perhitungan Estimasi</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">Komoditas</th>
-                                <th scope="col">Kuantitas</th>
-                                <th scope="col">Estimasi Biaya</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Beras Premium</td>
-                                <td>2 Kg</td>
-                                <td>Rp 33.000</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th scope="row" colspan="2" style="text-align: right;">Total Perkiraan:</th>
-                                <td><strong>Rp 33.000</strong></td>
-                            </tr>
-                        </tfoot>
-                    </table>
+            <!-- Section 1: Filter Bar (Menggunakan CSS Grid 4 Kolom) -->
+            <section class="filter-section">
+                <div class="filter-group">
+                    <label>Komoditas</label>
+                    <select><option>Beras</option><option>Cabai</option></select>
+                </div>
+                <div class="filter-group">
+                    <label>Jenis Pasar</label>
+                    <select><option>Pasar Tradisional</option></select>
+                </div>
+                <div class="filter-group">
+                    <label>Kecamatan</label>
+                    <select><option>Semua Kecamatan</option></select>
+                </div>
+                <div class="filter-group">
+                    <label>Tanggal</label>
+                    <input type="date" value="2026-09-15">
                 </div>
             </section>
-        </main>
 
-        <footer>
-            <p>&copy; 2026 Sembako Hub Tarakan - Portal Informasi Publik</p>
-        </footer>
-    </div>
+            <!-- Section 2: Visualisasi (Peta/Grafik) -->
+            <section class="visualization-section">
+                <div class="map-placeholder">
+                    <p>Area Visualisasi Peta / Grafik Sembako</p>
+                </div>
+            </section>
+
+            <!-- Section 3: Data Cards (Grid 4 Kolom seperti PIHPS) -->
+            <section class="data-grid">
+                <div class="data-card">
+                    <h3>Bawang Merah Ukuran Sedang</h3>
+                    <div class="price">Rp 37.250 <span>/ Kg</span></div>
+                    <div class="trend down">▼ -1.84% (Rp -700)</div>
+                </div>
+                <div class="data-card">
+                    <h3>Bawang Putih Ukuran Sedang</h3>
+                    <div class="price">Rp 39.250 <span>/ Kg</span></div>
+                    <div class="trend down">▼ -0.25% (Rp -100)</div>
+                </div>
+                <div class="data-card">
+                    <h3>Beras Kualitas Bawah I</h3>
+                    <div class="price">Rp 14.900 <span>/ Kg</span></div>
+                    <div class="trend neutral">■ Harga Tetap</div>
+                </div>
+                <div class="data-card">
+                    <h3>Beras Kualitas Medium I</h3>
+                    <div class="price">Rp 16.600 <span>/ Kg</span></div>
+                    <div class="trend neutral">■ Harga Tetap</div>
+                </div>
+                <div class="data-card">
+                    <h3>Cabai Merah Besar</h3>
+                    <div class="price">Rp 56.150 <span>/ Kg</span></div>
+                    <div class="trend up">▲ +2.10% (Rp +1.150)</div>
+                </div>
+                <div class="data-card">
+                    <h3>Cabai Rawit Merah</h3>
+                    <div class="price">Rp 93.200 <span>/ Kg</span></div>
+                    <div class="trend up">▲ +5.00% (Rp +4.400)</div>
+                </div>
+            </section>
+        </div>
+    </main>
 </body>
 </html>
