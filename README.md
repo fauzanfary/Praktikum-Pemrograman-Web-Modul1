@@ -1,40 +1,51 @@
-# Sembako Hub - Sistem Informasi & Prediksi Harga Pangan Tarakan
+# Sembako Hub Tarakan - Modul 3 Praktikum Pemrograman Web OBE
 
-Proyek Praktikum Pemrograman Web (OBE 2026) - Pertemuan 2
-Program Studi Sarjana Teknik Komputer, Universitas Borneo Tarakan
-Oleh: Ahmad Fauzan Al Ghifari (2440304012)
+Repository ini berisi implementasi Tugas Praktikum Pemrograman Web Modul 3 (CSS Modern, Responsive Design, Flexbox/Grid, dan Dasar UI/UX) berbasis *Outcome-Based Education* (OBE). Proyek ini merupakan *landing page* dan *dashboard* informasi kelistrikan pasar atau kebutuhan pokok (sembako) yang interaktif dan responsif.
 
-## Deskripsi Singkat
+## Informasi Mahasiswa
+* **Nama:** Ahmad Fauzan Al Ghifari[cite: 2]
+* **NPM:** 2440304012[cite: 2]
+* **Program Studi:** Sarjana Teknik Komputer[cite: 2]
+* **Universitas:** Universitas Borneo Tarakan (2026)[cite: 2]
 
-Sembako Hub Tarakan adalah portal informasi harga pangan dan kalkulator estimasi belanja berbasis web yang dirancang menggunakan standar semantik HTML5 dan aksesibilitas dasar (WCAG 2.1). Sistem ini memfasilitasi pemantauan tren harga komoditas lokal bagi masyarakat umum.
+---
 
-## Cara Menjalankan Menggunakan Laragon 5
+## Catatan Keputusan Desain (Design Decisions)
 
-1. Jalankan aplikasi Laragon dan klik **Start All**.
-2. Pastikan folder proyek berada di direktori: `C:\laragon\www\pemweb-obe` (atau menyesuaikan letak instalasi Anda).
-3. Buka browser dan akses URL: `http://localhost/pemweb-obe/`
+Dalam pengembangan UI/UX Sembako Hub, beberapa keputusan desain teknis telah diambil untuk memenuhi standar aksesibilitas dan responsivitas modern:
 
-## Checklist Aksesibilitas Dasar
+### 1. Arsitektur CSS & Custom Properties
+Menggunakan pendekatan *CSS Variables* (`:root`) untuk membangun sistem desain yang konsisten[cite: 2]. Palet warna diatur secara terpusat (seperti `--primary: #10b981;`, `--bg-surface`, dan `--text-main`), termasuk pengelolaan variabel *shadow* (`--shadow-sm`, `--shadow-md`) dan *border-radius* agar memudahkan transisi tema di masa depan[cite: 2].
 
-<<<<<<< HEAD
-| Parameter | Implementasi pada Kode | Status |
-| :--- | :--- | :--- |
-| **lang** | Menggunakan `<html lang="id">` untuk bahasa Indonesia. | ✓ |
-| **Heading** | Terstruktur runtut dari h1, h2, hingga h3 tanpa melompat. | ✓ |
-| **alt** | Gambar informatif memiliki deskripsi jelas, ikon dekoratif memakai `alt=""`. | ✓ |
-| **Label Form** | Setiap input terhubung dengan label via atribut `for` dan `id`. | ✓ |
-| **Teks link** | Deskriptif (misal: "Kalkulator Estimasi Belanja", bukan "klik di sini"). | ✓ |
-| **Keyboard** | Bisa dinavigasi menggunakan tombol Tab dan menyediakan *skip link*. | ✓ |
-=======
-**1. Analisis Request-Response (Target: ubt.ac.id)**
-Pada tahap awal proyek, telah dilakukan inspeksi jaringan untuk memahami komunikasi *client-server*. Berdasarkan tab *Network*, lima *request* utama menggunakan metode `GET` (Status `200 OK`) telah diidentifikasi:
-* Memuat pustaka CSS eksternal (`swiper-bundle.min.css`) untuk pengaturan tata letak.
-* Mengunduh aset visual situs (`UBT_bkkbn01.jpg`) yang disajikan dalam format WebP.
-* Memuat skrip JavaScript (`imagesloaded.min.js`) untuk mendeteksi status pemuatan aset.
-* Mengambil dua berkas tipografi dari peladen Google: *stylesheet* API aturan font (`/css2?family=Poppins`) dan *web font* itu sendiri (format `.woff2`).
+### 2. Pendekatan Layout (Flexbox & CSS Grid)
+* **Flexbox:** Digunakan pada komponen 1-dimensi seperti navigasi (`nav ul`) dengan kombinasi `display: flex; flex-wrap: wrap; justify-content: center;` untuk memastikan menu beradaptasi dengan baik di layar sempit tanpa terpotong[cite: 2].
+* **CSS Grid:** Diterapkan pada layout utama (`.main-grid`). Pada mode *mobile*, layout menggunakan `grid-template-columns: 1fr;` (satu kolom), yang kemudian diubah strukturnya pada layar lebar[cite: 2].
 
-**2. Refleksi Praktikum**
-Melalui tugas ini, saya lebih memahami alur komunikasi protokol HTTP/HTTPS serta mekanisme *request-response* saat peramban memuat berbagai aset web secara terpisah. Saya juga telah berhasil mempraktikkan fondasi *version control* menggunakan Git, mulai dari inisialisasi (*init*), rekam perubahan (*commit*), hingga pengunggahan (*push*) ke GitHub. Kendala utama berupa banyaknya *request* yang bertumpuk pada *developer tools* dapat diselesaikan dengan memfilter *header* secara spesifik untuk memastikan tidak ada data sensitif yang terekam.
+### 3. Responsive Design (Mobile-First)
+Desain dibangun dengan prinsip *mobile-first*, di mana pengaturan default CSS ditujukan untuk layar kecil (HP). Penyesuaian tata letak untuk Desktop dan Tablet dilakukan menggunakan Media Query `@media (min-width: 64rem)` yang secara otomatis menyesuaikan tata letak kolom *header* (`flex-direction: row; justify-content: space-between;`) agar proporsional di layar lebar[cite: 2].
 
-<!-- SUKES LANCAR REZEKI -->
->>>>>>> feature/struktur-home
+### 4. Komponen UI Reusable
+Proyek ini memecah elemen antarmuka menjadi minimal 3 kelas komponen yang dapat digunakan ulang (reusable)[cite: 2]:
+* **`.card`**: Komponen kotak pembungkus konten dengan efek transisi *hover* dan *box-shadow* dinamis (`box-shadow: var(--shadow-hover); transform: translateY(-4px);`)[cite: 2].
+* **`.btn`**: Tombol interaktif (Call-to-Action) dengan properti animasi, *padding*, dan efek bayangan[cite: 2].
+* **`.hero-section`**: Area *banner* utama yang dikelola menggunakan pengaturan Flexbox sentral (`align-items: center; text-align: center;`)[cite: 2].
+
+### 5. Aksesibilitas Visual (a11y)
+Untuk memenuhi standar aksesibilitas dasar (keterbacaan dan navigasi *keyboard*), properti `:focus-visible` diterapkan pada semua elemen tautan (`a`), tombol (`button`), dan *form* (`input`, `select`)[cite: 2]. Ketika elemen tersebut difokuskan via *keyboard* (tombol Tab), akan muncul *outline* tebal sebesar `3px solid var(--accent)` dengan *offset* `2px`, sehingga pengguna disabilitas visual dapat dengan mudah mengetahui posisi interaksi mereka[cite: 2].
+
+---
+
+## Dokumentasi Responsivitas (Pengujian)
+
+Proyek ini telah melalui tahap pengujian resolusi layar menggunakan mode *Responsive Design Mode* pada *browser*. Bukti visual dapat dilihat pada dokumentasi internal[cite: 2]:
+1. **Desktop View:** Menampilkan struktur grid sejajar ke samping dengan pemanfaatan ruang layar yang maksimal[cite: 2].
+2. **Tablet View:** Tampilan adaptif di mana elemen mulai menyesuaikan proporsi lebar.
+3. **Mobile View:** Tampilan menyusut menjadi format satu kolom (`1fr`) ke bawah agar konten mudah digulir (scroll) di ponsel pintar tanpa adanya *horizontal scrolling*[cite: 2].
+
+---
+
+## Panduan Menjalankan Proyek Lokal
+
+1. Pastikan **Laragon** (atau *local web server* sejenis) dalam keadaan aktif (Apache berjalan).
+2. Kloning repository ini atau letakkan folder proyek di dalam direktori `C:\laragon\www\pemweb-obe`.
+3. Buka *browser* dan akses URL: `http://localhost/pemweb-obe/`
