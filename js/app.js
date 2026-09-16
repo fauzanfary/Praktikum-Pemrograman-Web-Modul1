@@ -44,21 +44,12 @@ function ringkasKomoditas(data) {
 
 // Menampilkan data lokasi tertentu menggunakan filter (Latihan 1)
 const wilayahNaik = wilayahData.filter(wilayah => wilayah.status === "up");
-console.log("Wilayah dengan Harga Naik:", wilayahNaik);
 
-// Pencarian alat(komoditas) menggunakan find, destructuring, template literal (Latihan 2 & 3)
-function cariSembakoDanTampilkan(idDicari) {
-    const sembakoDicari = komoditasData.find(item => item.id === idDicari); // find
-    if (sembakoDicari) {
-        const { nama, harga, status } = sembakoDicari; // destructuring
-        console.log(`[Pencarian] ${nama} dijual seharga ${formatRupiah(harga)} dengan status ${status}.`); // template literal
-    } else {
-        console.log(`Komoditas dengan ID ${idDicari} tidak ditemukan.`);
-    }
+// Pencarian alat(komoditas) menggunakan find (Latihan 2)
+function cariSembako(idDicari) {
+    return komoditasData.find(item => item.id === idDicari);
 }
 
-// Memanggil fungsinya
-cariSembakoDanTampilkan(4); // Output: [Pencarian] Cabai Rawit Merah dijual seharga Rp 75000 dengan status up.
 
 // ==========================================
 // INISIALISASI & ERROR HANDLING (Tugas OBE)
@@ -80,7 +71,19 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("=== OUTPUT TUGAS MODUL 4 ===");
         console.log("Ringkasan Data Sembako:", ringkasKomoditas(komoditasData));
         console.log("Wilayah dengan Harga Naik:", wilayahNaik);
-        cariSembakoDanTampilkan(4); // Tes ID 4 (Cabai Rawit)
+
+        // Contoh pencarian ID 4 (Latihan 2)
+        const hasilCari = cariSembako(4);
+        if (hasilCari) {
+            console.log("Hasil Pencarian ID 4:", hasilCari);
+        }
+
+        // LATIHAN NO 3: Destructuring & Template Literal untuk setiap komoditas
+        console.log("--- Ringkasan Setiap Komoditas (Latihan 3) ---");
+        komoditasData.forEach(item => {
+            const { nama, harga, status } = item; // Destructuring
+            console.log(`Komoditas ${nama} saat ini dijual seharga ${formatRupiah(harga)} dengan tren ${status}.`); // Template literal
+        });
         console.log("============================");
 
     } catch (error) {
