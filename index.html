@@ -6,16 +6,15 @@
     <title>Pangan Tarakanku - Informasi Harga Pangan</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="nav-container">
+        <div class="container nav-container">
             <div class="logo-area">
-                <!-- Anggap ini logo pemerintah/institusi -->
-                <div class="logo-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="logo-icon"><i class="fa-solid fa-chart-line"></i></div>
                 <div class="logo-text">
                     <strong>Pangan Tarakanku</strong>
                     <span>Sistem Informasi Pangan Kota</span>
@@ -30,7 +29,7 @@
                 <li><a href="#">Tentang Kami</a></li>
             </ul>
             <div class="nav-contact">
-                <button class="btn-outline">Hubungi Kami</button>
+                <button class="btn-primary">Hubungi Kami</button>
             </div>
         </div>
     </nav>
@@ -39,7 +38,7 @@
     <main class="container">
         <!-- Section 1: Harga Komoditas Rata-rata -->
         <section class="section">
-            <div class="section-header">
+            <div class="section-header text-center">
                 <h1>Harga rata-rata komoditas hari ini di Tarakan</h1>
                 <p class="subtitle">Harga dibandingkan dengan hari sebelumnya 15 Sep 2026</p>
             </div>
@@ -54,7 +53,7 @@
         </section>
 
         <!-- Section 2: Peta Harga Per Wilayah -->
-        <section class="section section-gray">
+        <section class="section section-white" style="border-radius: 20px; padding: 40px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); margin-bottom: 40px;">
             <div class="section-header">
                 <h2>Peta harga komoditas hari ini di Tarakan</h2>
                 <p class="subtitle">Harga komoditas yang dipilih akan dibandingkan dengan hari sebelumnya 15 Sep 2026</p>
@@ -63,6 +62,7 @@
                         <option>Beras Medium</option>
                         <option>Beras Premium</option>
                         <option>Cabai Rawit Merah</option>
+                        <option>Daging Sapi Murni</option>
                     </select>
                 </div>
             </div>
@@ -70,8 +70,7 @@
             <div class="map-layout">
                 <!-- Sisi Kiri: Ilustrasi Peta -->
                 <div class="map-illustration">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Peta_Administrasi_Kota_Tarakan.png/800px-Peta_Administrasi_Kota_Tarakan.png" alt="Peta Tarakan" style="width:100%; opacity:0.8; filter: grayscale(100%); mix-blend-mode: multiply;">
-                    <!-- Placeholder peta sederhana -->
+                    <img src="PETATARAKAN.png" alt="Peta Tarakan">
                 </div>
                 
                 <!-- Sisi Kanan: Daftar Wilayah -->
@@ -83,7 +82,7 @@
 
         <!-- Section 3: Peraturan & HET -->
         <section class="section">
-            <div class="section-header">
+            <div class="section-header text-center">
                 <h2>Informasi Peraturan dan Harga Eceran Tertinggi (HET)</h2>
                 <p class="subtitle">Berikut adalah daftar komoditas pangan yang memiliki peraturan resmi beserta Harga Eceran Tertinggi (HET) yang berlaku.</p>
             </div>
@@ -119,10 +118,10 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <div class="logo-icon-large"><i class="fa-solid fa-leaf"></i></div>
+                <div class="logo-icon-large"><i class="fa-solid fa-chart-line"></i></div>
                 <div>
                     <h3>Informasi Pangan Tarakan</h3>
-                    <p class="copyright">Copyright © 2026 Pemkot Tarakan</p>
+                    <p class="subtitle" style="color: #A0AEC0;">Sistem Informasi Pangan Kota Tarakan memberikan sajian harga bahan pokok dan penting tingkat kota.</p>
                 </div>
             </div>
             <div class="footer-links">
@@ -142,9 +141,11 @@
                 </ul>
             </div>
         </div>
+        <div class="container">
+            <div class="copyright">Copyright © 2026 Pemerintah Kota Tarakan - Dinas Perdagangan. All rights reserved.</div>
+        </div>
     </footer>
 
-    <script src="js/utils.js"></script>
-    <script src="js/app.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>

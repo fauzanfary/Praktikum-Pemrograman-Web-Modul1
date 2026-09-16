@@ -1,6 +1,9 @@
 // js/app.js
 
-// 1. Data Komoditas (Mock Data)
+// 1. IMPORT MODUL DARI utils.js
+import { formatRupiah, getBadgeConfig, ringkasDataKomoditas, cariKomoditasById } from './utils.js';
+
+// 2. DATA DUMMY
 const komoditasData = [
     { id: 1, nama: "Beras Medium", harga: 14500, status: "up", selisih: 150, img: "https://cdn-icons-png.flaticon.com/512/3014/3014522.png" },
     { id: 2, nama: "Beras Premium", harga: 16200, status: "down", selisih: 200, img: "https://cdn-icons-png.flaticon.com/512/3014/3014522.png" },
@@ -10,7 +13,6 @@ const komoditasData = [
     { id: 6, nama: "Daging Sapi Murni", harga: 140000, status: "stable", selisih: 0, img: "https://cdn-icons-png.flaticon.com/512/3143/3143645.png" }
 ];
 
-// 2. Data Wilayah Kecamatan di Tarakan
 const wilayahData = [
     { nama: "Tarakan Tengah", h_kemarin: 14350, h_sekarang: 14500, status: "up", selisih: 150 },
     { nama: "Tarakan Barat", h_kemarin: 14500, h_sekarang: 14500, status: "stable", selisih: 0 },
@@ -18,14 +20,31 @@ const wilayahData = [
     { nama: "Tarakan Utara", h_kemarin: 14400, h_sekarang: 14500, status: "up", selisih: 100 }
 ];
 
-// 3. Data HET (Harga Eceran Tertinggi)
 const hetData = [
     { nama: "Beras Setra / Premium", harga: 14900, peraturan: "Peraturan Badan Pangan Nasional Nomor 299 Tahun 2025" },
     { nama: "Beras Medium", harga: 13500, peraturan: "Peraturan Badan Pangan Nasional Nomor 299 Tahun 2025" },
     { nama: "Minyak Goreng MINYAKITA", harga: 15700, peraturan: "Peraturan Menteri Perdagangan No. 18 Tahun 2024" }
 ];
 
-// Inisialisasi saat web dimuat
+// 3. LOGIKA PRAKTIKUM MODUL 4 (Pengolahan Array & Error Handling)
+try {
+    const komoditasTurun = komoditasData.filter(item => item.status === 'down');
+    console.log("Komoditas Mengalami Penurunan Harga:", komoditasTurun);
+
+    const daftarNamaKomoditas = komoditasData.map(({ nama }) => nama);
+    console.log("Daftar Nama Komoditas Tarakan:", daftarNamaKomoditas);
+
+    const statistikSembako = ringkasDataKomoditas(komoditasData);
+    console.log("Statistik Harga Sembako Keseluruhan:", statistikSembako);
+
+    const cabaiRawit = cariKomoditasById(komoditasData, 4);
+    console.log(`INFO: Komoditas ${cabaiRawit.nama} dijual seharga ${formatRupiah(cabaiRawit.harga)}.`);
+
+} catch (error) {
+    console.error("Terjadi kegagalan saat memproses data sembako:", error.message);
+}
+
+// 4. RENDER UI KE DALAM HTML
 document.addEventListener('DOMContentLoaded', () => {
     renderKomoditas();
     renderWilayah();
@@ -33,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCarousel();
 });
 
-// Fungsi Render Komoditas
 function renderKomoditas() {
     const container = document.getElementById('komoditas-container');
     container.innerHTML = ''; 
@@ -44,7 +62,7 @@ function renderKomoditas() {
             <div class="card">
                 <div class="card-img-wrap"><img src="${item.img}" alt="${item.nama}"></div>
                 <div class="card-title">${item.nama}</div>
-                <div class="card-price">${formatRupiah(item.harga)}<span style="font-size:0.7rem; color:#6b7280; font-weight:normal;">/kg</span></div>
+                <div class="card-price">${formatRupiah(item.harga)}<span style="font-size:0.85rem; color:var(--text-muted); font-weight:500; margin-left:4px;">/kg</span></div>
                 <div class="badge-container">
                     <div class="badge ${badge.class}">
                         <i class="fa-solid ${badge.icon}"></i> ${badge.text}
@@ -57,7 +75,6 @@ function renderKomoditas() {
     });
 }
 
-// Fungsi Render Daftar Wilayah (Tarakan)
 function renderWilayah() {
     const container = document.getElementById('region-container');
     container.innerHTML = '';
@@ -82,7 +99,6 @@ function renderWilayah() {
     });
 }
 
-// Fungsi Render Tabel HET
 function renderHET() {
     const container = document.getElementById('het-container');
     container.innerHTML = '';
@@ -99,17 +115,18 @@ function renderHET() {
     });
 }
 
-// Fungsi Scroll untuk Tombol Carousel Komoditas
 function setupCarousel() {
     const track = document.getElementById('komoditas-container');
     const btnPrev = document.querySelector('.prev-btn');
     const btnNext = document.querySelector('.next-btn');
 
-    btnNext.addEventListener('click', () => {
-        track.scrollBy({ left: 300, behavior: 'smooth' });
-    });
+    if (btnNext && btnPrev && track) {
+        btnNext.addEventListener('click', () => {
+            track.scrollBy({ left: 300, behavior: 'smooth' });
+        });
 
-    btnPrev.addEventListener('click', () => {
-        track.scrollBy({ left: -300, behavior: 'smooth' });
-    });
+        btnPrev.addEventListener('click', () => {
+            track.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+    }
 }
