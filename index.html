@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portal Informasi dan Kalkulator Harga Sembako Tarakan">
     <title>Sembako Hub Tarakan - Info & Prediksi</title>
-    <!-- Menghubungkan file CSS -->
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Tambahan style ringan untuk error message */
+        .error-msg { color: red; font-weight: bold; margin-top: 10px; display: none; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -21,73 +24,22 @@
             </nav>
         </header>
 
-        <!-- Hero Section -->
+        <!-- Hero Section & Main Grid (Berita) biarkan sama seperti kodemu -->
         <section class="hero-section">
             <h2>Pantau Harga Sembako Tarakan Real-time</h2>
             <p>Dapatkan informasi terkini seputar harga kebutuhan pokok, prediksi tren pasar, dan kalkulasi estimasi belanja Anda di satu portal terintegrasi.</p>
             <a href="#kalkulator" class="btn btn-hero">Coba Kalkulator Belanja</a>
         </section>
 
-        <!-- Elemen grid-layout ditambahkan untuk memenuhi Latihan Grid 3 Kolom -->
         <main class="main-grid">
-            <!-- Seksi Berita dan Prediksi -->
-            <section id="berita-prediksi" class="card">
-                <h2>Berita & Prediksi Harga (1 Minggu ke Depan)</h2>
-                <article>
-                    <header>
-                        <h3>Prediksi Lonjakan Harga Cabai Rawit Jelang Musim Hujan</h3>
-                        <p class="meta-text">Dipublikasikan pada: <time datetime="2026-09-08">08 September 2026</time> oleh Analis Pasar</p>
-                    </header>
-                    
-                    <figure>
-                        <img src="images.jpg" alt="Petugas meninjau dinamika harga pangan lokal di pasar Tarakan" loading="lazy">
-                        <figcaption>Dinamika Harga Pangan Lokal: Komoditas Cabai Merah di Tarakan Mengalami Kenaikan.</figcaption>
-                    </figure>
+            <!-- (Bagian Berita & Prediksi disembunyikan di sini agar ringkas, gunakan kodemu yang lama) -->
 
-                    <p>Pasokan cabai rawit dari luar daerah Tarakan diprediksi akan mengalami keterlambatan akibat cuaca buruk di perairan.</p>
-                    <blockquote>
-                        "Kami memprediksi dalam 7 hari ke depan, harga cabai rawit merah akan merangkak naik hingga menyentuh Rp 95.000 per Kg." - Dinas Perdagangan.
-                    </blockquote>
-                    
-                    <div class="table-responsive">
-                        <table>
-                            <caption>Proyeksi Harga Cabai Rawit (09 - 15 September 2026)</caption>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Komoditas</th>
-                                    <th scope="col">Harga Saat Ini</th>
-                                    <th scope="col">Prediksi Puncak (1 Minggu)</th>
-                                    <th scope="col">Status Tren</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Cabai Rawit Merah</td>
-                                    <td>Rp 83.200 / Kg</td>
-                                    <td>Rp 95.000 / Kg</td>
-                                    <td><span class="badge danger">Naik Signifikan</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Bawang Merah</td>
-                                    <td>Rp 38.400 / Kg</td>
-                                    <td>Rp 37.000 / Kg</td>
-                                    <td><span class="badge success">Turun Stabil</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </article>
-            </section>
-
-            <!-- Seksi Katalog Harga -->
+            <!-- Seksi Katalog Harga Dinamis -->
             <section id="katalog-harga" class="card">
                 <h2>Katalog Harga Pangan Hari Ini</h2>
-                <dl class="katalog-list">
-                    <dt><strong>Beras Kualitas Premium I</strong></dt>
-                    <dd>Harga per Kg: Rp 16.500</dd>
-                    
-                    <dt><strong>Minyak Goreng Kemasan</strong></dt>
-                    <dd>Harga per Liter: Rp 18.000</dd>
+                <!-- ID katalog-list-container ditambahkan untuk dirender oleh JS -->
+                <dl class="katalog-list" id="katalog-list-container">
+                    <p>Memuat data katalog...</p>
                 </dl>
             </section>
 
@@ -96,16 +48,15 @@
                 <h2>Kalkulator Estimasi Belanja</h2>
                 <p>Gunakan alat ini untuk menghitung perkiraan pengeluaran belanja Anda di pasar.</p>
                 
-                <form action="#" method="GET">
+                <form id="form-kalkulator" action="#" method="GET">
                     <fieldset>
                         <legend>Pilih Barang dan Kuantitas</legend>
                         
                         <div class="form-group">
                             <label for="item_1">Pilih Komoditas:</label>
-                            <select id="item_1" name="item_1">
-                                <option value="16500">Beras Premium (Rp 16.500)</option>
-                                <option value="38400">Bawang Merah (Rp 38.400)</option>
-                                <option value="18000">Minyak Goreng (Rp 18.000)</option>
+                            <!-- ID item_1 dikosongkan untuk diisi otomatis dari JS -->
+                            <select id="item_1" name="item_1" required>
+                                <option value="" disabled selected>Pilih Sembako...</option>
                             </select>
                         </div>
                         
@@ -115,6 +66,7 @@
                         </div>
                         
                         <button type="submit" class="btn">Hitung Subtotal</button>
+                        <p id="error-message" class="error-msg">Terjadi kesalahan!</p>
                     </fieldset>
                 </form>
 
@@ -128,18 +80,14 @@
                                 <th scope="col">Estimasi Biaya</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <!-- ID tabel ditambahkan -->
+                        <tbody id="hasil-kalkulator-body">
                             <tr>
-                                <td>Beras Premium</td>
-                                <td>2 Kg</td>
-                                <td>Rp 33.000</td>
+                                <td colspan="3" style="text-align: center;">Belum ada perhitungan</td>
                             </tr>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th scope="row" colspan="2" style="text-align: right;">Total Perkiraan:</th>
-                                <td><strong>Rp 33.000</strong></td>
-                            </tr>
+                        <tfoot id="hasil-kalkulator-foot">
+                            <!-- Diisi oleh JS -->
                         </tfoot>
                     </table>
                 </div>
@@ -150,5 +98,8 @@
             <p>&copy; 2026 Sembako Hub Tarakan - Portal Informasi Publik</p>
         </footer>
     </div>
+
+    <!-- MENGHUBUNGKAN MODULE JAVASCRIPT (Tugas Modul 4) -->
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
