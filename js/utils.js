@@ -1,14 +1,30 @@
-// Memenuhi Langkah Praktikum 6 & 8: Fungsi ringkasInventaris diekstrak ke utils.js
-export function ringkasInventaris(data) {
-    if (!Array.isArray(data)) throw new TypeError('Data harus berupa array');
-    return {
-        jenisAlat: data.length,
-        totalUnit: data.reduce((sum, item) => sum + item.jumlah, 0),
-        perluCek: data.filter(item => item.kondisi !== 'Baik').length
-    };
+// js/utils.js
+
+/**
+ * Fungsi untuk mengubah angka menjadi format mata uang Rupiah
+ * @param {number} number 
+ * @returns {string} Format Rp
+ */
+function formatRupiah(number) {
+    return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+    }).format(number);
 }
 
-// Memenuhi Latihan 2: Fungsi mencari alat berdasarkan id menggunakan 'find'
-export function cariAlatBerdasarkanId(data, idDicari) {
-    return data.find(item => item.id === idDicari);
+/**
+ * Fungsi untuk menentukan class CSS dan Icon berdasarkan status harga
+ * @param {string} status ('up', 'down', 'stable')
+ * @returns {object} Object berisi class css dan icon class
+ */
+function getIndicatorStyle(status) {
+    switch(status) {
+        case 'up':
+            return { class: 'up', icon: 'fa-arrow-up' };
+        case 'down':
+            return { class: 'down', icon: 'fa-arrow-down' };
+        default:
+            return { class: 'stable', icon: 'fa-minus' };
+    }
 }
