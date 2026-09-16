@@ -3,103 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portal Informasi dan Kalkulator Harga Sembako Tarakan">
-    <title>Sembako Hub Tarakan - Info & Prediksi</title>
+    <title>Pangan Tarakanku - Informasi Pangan Daerah</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Tambahan style ringan untuk error message */
-        .error-msg { color: red; font-weight: bold; margin-top: 10px; display: none; }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Sembako Hub Tarakan</h1>
-            <nav aria-label="Navigasi Utama">
+    <header class="navbar">
+        <div class="container">
+            <h1>Pangan Tarakanku</h1>
+            <nav>
                 <ul>
-                    <li><a href="#berita-prediksi">Berita & Prediksi</a></li>
-                    <li><a href="#katalog-harga">Katalog Harga</a></li>
-                    <li><a href="#kalkulator">Kalkulator Belanja</a></li>
+                    <li><a href="#beranda">Beranda</a></li>
+                    <li><a href="#tentang">Tentang</a></li>
+                    <li><a href="#data-pangan">Data Harga</a></li>
                 </ul>
             </nav>
-        </header>
+        </div>
+    </header>
 
-        <!-- Hero Section & Main Grid (Berita) biarkan sama seperti kodemu -->
-        <section class="hero-section">
-            <h2>Pantau Harga Sembako Tarakan Real-time</h2>
-            <p>Dapatkan informasi terkini seputar harga kebutuhan pokok, prediksi tren pasar, dan kalkulasi estimasi belanja Anda di satu portal terintegrasi.</p>
-            <a href="#kalkulator" class="btn btn-hero">Coba Kalkulator Belanja</a>
+    <main class="container">
+        <!-- Bagian Tentang (Sesuai referensi Info Pangan Jakarta) -->
+        <section id="tentang" class="section-card">
+            <h2>Tentang Pangan Tarakanku</h2>
+            <div class="about-content">
+                <img src="images.jpg" alt="Ilustrasi Pasar Tarakan" class="about-img" onerror="this.style.display='none'">
+                <div class="about-text">
+                    <p><strong>Pangan Tarakanku</strong> adalah portal informasi publik yang menyajikan data perkembangan harga kebutuhan pokok secara aktual di wilayah Tarakan dan sekitarnya.</p>
+                    <p>Sistem ini dibangun untuk membantu masyarakat, UMKM, dan pembuat kebijakan dalam memantau dinamika harga pasar, memastikan transparansi, dan menjaga stabilitas ketahanan pangan lokal, terutama dalam menghadapi kendala cuaca perairan yang sering mempengaruhi pasokan.</p>
+                </div>
+            </div>
         </section>
 
-        <main class="main-grid">
-            <!-- (Bagian Berita & Prediksi disembunyikan di sini agar ringkas, gunakan kodemu yang lama) -->
+        <!-- Bagian Data Pangan (Untuk implementasi JavaScript Modul 04) -->
+        <section id="data-pangan" class="section-card">
+            <h2>Informasi Harga Pangan Hari Ini</h2>
+            <div class="filter-group">
+                <label for="filter-kategori">Filter Kategori:</label>
+                <select id="filter-kategori">
+                    <option value="semua">Semua Komoditas</option>
+                    <option value="Beras">Beras</option>
+                    <option value="Sayur">Sayur & Bumbu</option>
+                    <option value="Protein">Daging & Ikan</option>
+                </select>
+            </div>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Komoditas</th>
+                            <th>Kategori</th>
+                            <th>Harga Rata-rata</th>
+                            <th>Status Pasokan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel-pangan-body">
+                        <tr><td colspan="4">Memuat data pangan...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="error-pesan" class="error-text"></p>
+        </section>
+    </main>
 
-            <!-- Seksi Katalog Harga Dinamis -->
-            <section id="katalog-harga" class="card">
-                <h2>Katalog Harga Pangan Hari Ini</h2>
-                <!-- ID katalog-list-container ditambahkan untuk dirender oleh JS -->
-                <dl class="katalog-list" id="katalog-list-container">
-                    <p>Memuat data katalog...</p>
-                </dl>
-            </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Pangan Tarakanku - Proyek Pengembangan Antarmuka Web.</p>
+        </div>
+    </footer>
 
-            <!-- Seksi Kalkulator Pengganti Keranjang -->
-            <section id="kalkulator" class="card">
-                <h2>Kalkulator Estimasi Belanja</h2>
-                <p>Gunakan alat ini untuk menghitung perkiraan pengeluaran belanja Anda di pasar.</p>
-                
-                <form id="form-kalkulator" action="#" method="GET">
-                    <fieldset>
-                        <legend>Pilih Barang dan Kuantitas</legend>
-                        
-                        <div class="form-group">
-                            <label for="item_1">Pilih Komoditas:</label>
-                            <!-- ID item_1 dikosongkan untuk diisi otomatis dari JS -->
-                            <select id="item_1" name="item_1" required>
-                                <option value="" disabled selected>Pilih Sembako...</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="qty_1">Jumlah (Kg/Liter):</label>
-                            <input type="number" id="qty_1" name="qty_1" min="1" value="1" required>
-                        </div>
-                        
-                        <button type="submit" class="btn">Hitung Subtotal</button>
-                        <p id="error-message" class="error-msg">Terjadi kesalahan!</p>
-                    </fieldset>
-                </form>
-
-                <div class="table-responsive" style="margin-top: 1rem;">
-                    <table>
-                        <caption>Hasil Perhitungan Estimasi</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">Komoditas</th>
-                                <th scope="col">Kuantitas</th>
-                                <th scope="col">Estimasi Biaya</th>
-                            </tr>
-                        </thead>
-                        <!-- ID tabel ditambahkan -->
-                        <tbody id="hasil-kalkulator-body">
-                            <tr>
-                                <td colspan="3" style="text-align: center;">Belum ada perhitungan</td>
-                            </tr>
-                        </tbody>
-                        <tfoot id="hasil-kalkulator-foot">
-                            <!-- Diisi oleh JS -->
-                        </tfoot>
-                    </table>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2026 Sembako Hub Tarakan - Portal Informasi Publik</p>
-        </footer>
-    </div>
-
-    <!-- MENGHUBUNGKAN MODULE JAVASCRIPT (Tugas Modul 4) -->
+    <!-- Implementasi ES Modules sesuai Modul 04 -->
     <script type="module" src="js/app.js"></script>
 </body>
 </html>
