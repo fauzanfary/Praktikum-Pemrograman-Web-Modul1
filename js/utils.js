@@ -1,30 +1,38 @@
 // js/utils.js
 
 /**
- * Fungsi untuk mengubah angka menjadi format mata uang Rupiah
- * @param {number} number 
- * @returns {string} Format Rp
+ * Format angka ke Rupiah
  */
-function formatRupiah(number) {
+const formatRupiah = (angka) => {
     return new Intl.NumberFormat('id-ID', {
         style: 'currency',
         currency: 'IDR',
         minimumFractionDigits: 0
-    }).format(number);
-}
+    }).format(angka);
+};
 
 /**
- * Fungsi untuk menentukan class CSS dan Icon berdasarkan status harga
- * @param {string} status ('up', 'down', 'stable')
- * @returns {object} Object berisi class css dan icon class
+ * Mendapatkan konfigurasi UI berdasarkan status harga
+ * Dalam harga pangan: Harga Naik = Merah (Warning), Harga Turun = Hijau (Good)
  */
-function getIndicatorStyle(status) {
-    switch(status) {
-        case 'up':
-            return { class: 'up', icon: 'fa-arrow-up' };
-        case 'down':
-            return { class: 'down', icon: 'fa-arrow-down' };
-        default:
-            return { class: 'stable', icon: 'fa-minus' };
+const getBadgeConfig = (status, selisih) => {
+    if (status === 'up') {
+        return { 
+            class: 'up', 
+            icon: 'fa-arrow-up', 
+            text: `Harga Naik Rp ${selisih}` 
+        };
+    } else if (status === 'down') {
+        return { 
+            class: 'down', 
+            icon: 'fa-arrow-down', 
+            text: `Harga Turun Rp ${selisih}` 
+        };
+    } else {
+        return { 
+            class: 'stable', 
+            icon: 'fa-minus', 
+            text: 'Stabil' 
+        };
     }
-}
+};

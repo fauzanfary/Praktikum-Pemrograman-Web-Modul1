@@ -5,68 +5,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pangan Tarakanku - Informasi Harga Pangan</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Menggunakan FontAwesome untuk icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Menggunakan font Google Inter agar terlihat modern -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <i class="fa-solid fa-seedling"></i>
-                <span>Pangan Tarakanku</span>
+            <div class="logo-area">
+                <!-- Anggap ini logo pemerintah/institusi -->
+                <div class="logo-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="logo-text">
+                    <strong>Pangan Tarakanku</strong>
+                    <span>Sistem Informasi Pangan Kota</span>
+                </div>
             </div>
             <ul class="nav-links">
                 <li><a href="#" class="active">Komoditas</a></li>
                 <li><a href="#">Pasar</a></li>
                 <li><a href="#">Statistik</a></li>
                 <li><a href="#">Berita</a></li>
+                <li><a href="#">Metadata</a></li>
                 <li><a href="#">Tentang Kami</a></li>
             </ul>
             <div class="nav-contact">
-                <button class="btn-hubungi">Hubungi Kami</button>
+                <button class="btn-outline">Hubungi Kami</button>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="container">
-        <section class="header-section">
-            <h1>Harga rata-rata komoditas hari ini di Tarakan</h1>
-            <p class="subtitle">Harga dibandingkan dengan hari sebelumnya</p>
+        <!-- Section 1: Harga Komoditas Rata-rata -->
+        <section class="section">
+            <div class="section-header">
+                <h1>Harga rata-rata komoditas hari ini di Tarakan</h1>
+                <p class="subtitle">Harga dibandingkan dengan hari sebelumnya 15 Sep 2026</p>
+            </div>
+            
+            <div class="carousel-container">
+                <button class="nav-btn prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="komoditas-track" id="komoditas-container">
+                    <!-- Cards akan dirender oleh JS -->
+                </div>
+                <button class="nav-btn next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
         </section>
 
-        <!-- Tempat kartu komoditas akan dirender oleh JavaScript -->
-        <section class="komoditas-grid" id="komoditas-container">
-            <!-- Data akan di-inject dari app.js -->
+        <!-- Section 2: Peta Harga Per Wilayah -->
+        <section class="section section-gray">
+            <div class="section-header">
+                <h2>Peta harga komoditas hari ini di Tarakan</h2>
+                <p class="subtitle">Harga komoditas yang dipilih akan dibandingkan dengan hari sebelumnya 15 Sep 2026</p>
+                <div class="filter-dropdown">
+                    <select id="select-komoditas">
+                        <option>Beras Medium</option>
+                        <option>Beras Premium</option>
+                        <option>Cabai Rawit Merah</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="map-layout">
+                <!-- Sisi Kiri: Ilustrasi Peta -->
+                <div class="map-illustration">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Peta_Administrasi_Kota_Tarakan.png/800px-Peta_Administrasi_Kota_Tarakan.png" alt="Peta Tarakan" style="width:100%; opacity:0.8; filter: grayscale(100%); mix-blend-mode: multiply;">
+                    <!-- Placeholder peta sederhana -->
+                </div>
+                
+                <!-- Sisi Kanan: Daftar Wilayah -->
+                <div class="region-list" id="region-container">
+                    <!-- List Wilayah dirender oleh JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Peraturan & HET -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Informasi Peraturan dan Harga Eceran Tertinggi (HET)</h2>
+                <p class="subtitle">Berikut adalah daftar komoditas pangan yang memiliki peraturan resmi beserta Harga Eceran Tertinggi (HET) yang berlaku.</p>
+            </div>
+            <div class="table-container">
+                <table class="het-table">
+                    <thead>
+                        <tr>
+                            <th>NAMA KOMODITAS</th>
+                            <th>HARGA ECERAN TERTINGGI</th>
+                            <th>PERATURAN</th>
+                        </tr>
+                    </thead>
+                    <tbody id="het-container">
+                        <!-- Tabel dirender oleh JS -->
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Pre-Footer Call to Action -->
+    <div class="cta-banner">
+        <div class="container cta-content">
+            <div>
+                <h2>Butuh Bantuan?</h2>
+                <p>Tanyakan apapun dan tim kami akan siap membantumu!</p>
+            </div>
+            <button class="btn-solid-white">Hubungi Kami Sekarang</button>
+        </div>
+    </div>
+
+    <!-- Footer Utama -->
     <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-info">
-                <h2>Pangan Tarakanku</h2>
-                <p>Sistem Informasi Harga Pangan Kota Tarakan.</p>
-                <button class="btn-hubungi-footer">Hubungi Kami Sekarang</button>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="logo-icon-large"><i class="fa-solid fa-leaf"></i></div>
+                <div>
+                    <h3>Informasi Pangan Tarakan</h3>
+                    <p class="copyright">Copyright © 2026 Pemkot Tarakan</p>
+                </div>
             </div>
             <div class="footer-links">
+                <h4>Situs</h4>
                 <ul>
                     <li><a href="#">Komoditas</a></li>
                     <li><a href="#">Statistik</a></li>
                     <li><a href="#">Berita</a></li>
                 </ul>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Pangan Tarakanku. All rights reserved.</p>
+            <div class="footer-links">
+                <h4>Link</h4>
+                <ul>
+                    <li><a href="#">Dinas Perdagangan</a></li>
+                    <li><a href="#">Pasar Tenguyun</a></li>
+                    <li><a href="#">Tentang Kami</a></li>
+                </ul>
+            </div>
         </div>
     </footer>
 
-    <!-- Script dipisah sesuai struktur folder -->
     <script src="js/utils.js"></script>
     <script src="js/app.js"></script>
 </body>
