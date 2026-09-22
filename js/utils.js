@@ -26,26 +26,28 @@ export const getBadgeConfig = (status, selisih) => {
 
 /**
  * FUNGSI PRAKTIKUM MODUL 4: Mengolah ringkasan data komoditas
- * Menggunakan Arrow Function, array method (reduce, filter), dan Error Handling
+ * Menggunakan Arrow Function, array method (reduce, filter, map), dan Error Handling
  */
 export const ringkasDataKomoditas = (data) => {
+    // Error Handling Dasar (Melempar error jika data bukan array)
     if (!Array.isArray(data)) {
         throw new TypeError("Data komoditas yang dimasukkan harus berupa array");
     }
 
     return {
-        totalItem: data.length,
-        // Reduce: Mencari total seluruh harga
-        rataRataHarga: data.reduce((sum, item) => sum + item.harga, 0) / data.length,
-        // Filter: Menghitung berapa komoditas yang harganya naik
-        jumlahNaik: data.filter(item => item.status === 'up').length,
-        // Filter: Menghitung komoditas dengan harga stabil
-        jumlahStabil: data.filter(item => item.status === 'stable').length
+        totalJenisKomo: data.length,
+        // Reduce: Mengkalkulasi total seluruh harga
+        totalHarga: data.reduce((sum, item) => sum + item.harga, 0),
+        // Filter: Menghitung berapa komoditas yang harganya stabil
+        jumlahStabil: data.filter(item => item.status === 'stable').length,
+        // Map: Mengambil hanya nama komoditas lalu digabung menjadi satu kalimat string
+        daftarNama: data.map(item => item.nama).join(', ')
     };
 };
 
 /**
  * FUNGSI LATIHAN: Mencari komoditas berdasarkan ID
+ * Menggunakan array method: find
  */
 export const cariKomoditasById = (data, idDicari) => {
     return data.find(item => item.id === idDicari);

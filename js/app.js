@@ -36,17 +36,31 @@ const beritaData = [
 
 // 3. LOGIKA PRAKTIKUM MODUL 4 (Pengolahan Array & Error Handling)
 try {
+    // 1. Tampilkan seluruh array menggunakan tabel
+    console.log("DATA KOMODITAS SEMBAKO");
+    console.table(komoditasData);
+
+    // 2. Tampilkan hasil filter (Penurunan Harga) menggunakan tabel
     const komoditasTurun = komoditasData.filter(item => item.status === 'down');
-    console.log("Komoditas Mengalami Penurunan Harga:", komoditasTurun);
+    console.log("KOMODITAS MENGALAMI PENURUNAN HARGA");
+    console.table(komoditasTurun);
 
-    const daftarNamaKomoditas = komoditasData.map(({ nama }) => nama);
-    console.log("Daftar Nama Komoditas Tarakan:", daftarNamaKomoditas);
-
+    // 3. Tampilkan object statistik menggunakan tabel
     const statistikSembako = ringkasDataKomoditas(komoditasData);
-    console.log("Statistik Harga Sembako Keseluruhan:", statistikSembako);
+    console.log("STATISTIK HARGA SEMBAKO KESELURUHAN");
+    console.table(statistikSembako);
 
+    // 4. Pencarian ID menggunakan log biasa (seperti foto pertama)
     const cabaiRawit = cariKomoditasById(komoditasData, 4);
-    console.log(`INFO: Komoditas ${cabaiRawit.nama} dijual seharga ${formatRupiah(cabaiRawit.harga)}.`);
+    console.log("PENCARIAN ID 4");
+    console.log(cabaiRawit);
+
+    // 5. Destructuring dan Template Literal untuk ringkasan kalimat
+    console.log("RINGKASAN DATA KOMODITAS");
+    komoditasData.forEach(({ nama, harga, status }) => {
+        // Menggunakan formatRupiah yang sudah kamu import
+        console.log(`Komoditas "${nama}" dijual seharga ${formatRupiah(harga)} dengan tren ${status}.`);
+    });
 
 } catch (error) {
     console.error("Terjadi kegagalan saat memproses data sembako:", error.message);
