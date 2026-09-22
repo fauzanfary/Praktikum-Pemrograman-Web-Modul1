@@ -1,8 +1,9 @@
 // js/app.js
-// Import fungsi dari utils.js
-import { formatRupiah, getBadgeConfig } from './utils.js';
 
-// 1. Data Komoditas (Mock Data)
+// 1. IMPORT MODUL DARI utils.js
+import { formatRupiah, getBadgeConfig, ringkasDataKomoditas, cariKomoditasById } from './utils.js';
+
+// 2. DATA DUMMY
 const komoditasData = [
     { id: 1, nama: "Beras Medium", harga: 14500, status: "up", selisih: 150, img: "https://cdn-icons-png.flaticon.com/512/3014/3014522.png" },
     { id: 2, nama: "Beras Premium", harga: 16200, status: "down", selisih: 200, img: "https://cdn-icons-png.flaticon.com/512/3014/3014522.png" },
@@ -12,7 +13,6 @@ const komoditasData = [
     { id: 6, nama: "Daging Sapi Murni", harga: 140000, status: "stable", selisih: 0, img: "https://cdn-icons-png.flaticon.com/512/3143/3143645.png" }
 ];
 
-// 2. Data Wilayah Kecamatan di Tarakan
 const wilayahData = [
     { nama: "Tarakan Tengah", h_kemarin: 14350, h_sekarang: 14500, status: "up", selisih: 150 },
     { nama: "Tarakan Barat", h_kemarin: 14500, h_sekarang: 14500, status: "stable", selisih: 0 },
@@ -20,86 +20,59 @@ const wilayahData = [
     { nama: "Tarakan Utara", h_kemarin: 14400, h_sekarang: 14500, status: "up", selisih: 100 }
 ];
 
-// 3. Data HET (Harga Eceran Tertinggi)
 const hetData = [
     { nama: "Beras Setra / Premium", harga: 14900, peraturan: "Peraturan Badan Pangan Nasional Nomor 299 Tahun 2025" },
     { nama: "Beras Medium", harga: 13500, peraturan: "Peraturan Badan Pangan Nasional Nomor 299 Tahun 2025" },
     { nama: "Minyak Goreng MINYAKITA", harga: 15700, peraturan: "Peraturan Menteri Perdagangan No. 18 Tahun 2024" }
 ];
 
+// Data Berita (Mock Data)
+const beritaData = [
+    { judul: "Stok Beras Tarakan Aman Hingga Akhir Tahun", tanggal: "16 Sep 2026", img: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=400&q=80" },
+    { judul: "Pemkot Gelar Pasar Murah di Tarakan Barat", tanggal: "15 Sep 2026", img: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=80" },
+    { judul: "Harga Cabai Rawit Merangkak Naik", tanggal: "14 Sep 2026", img: "https://images.unsplash.com/photo-1596556488703-911e860bc005?w=400&q=80" },
+    { judul: "Distribusi Minyakita Kembali Normal", tanggal: "12 Sep 2026", img: "https://images.unsplash.com/photo-1627485937980-221c88ac04f9?w=400&q=80" }
+];
 
-// ==========================================
-// TUGAS MODUL 4: PENGOLAHAN DATA & LOGIKA
-// ==========================================
+// 3. LOGIKA PRAKTIKUM MODUL 4 (Pengolahan Array & Error Handling)
+try {
+    const komoditasTurun = komoditasData.filter(item => item.status === 'down');
+    console.log("Komoditas Mengalami Penurunan Harga:", komoditasTurun);
 
-// Menggunakan filter, reduce, dan map (Langkah 3,4,5,6)
-function ringkasKomoditas(data) {
-    return {
-        totalJenis: data.length,
-        jumlahStabil: data.filter(item => item.status === "stable").length, // filter
-        totalHarga: data.reduce((sum, item) => sum + item.harga, 0),        // reduce
-        daftarNama: data.map(item => item.nama)                             // map
-    };
+    const daftarNamaKomoditas = komoditasData.map(({ nama }) => nama);
+    console.log("Daftar Nama Komoditas Tarakan:", daftarNamaKomoditas);
+
+    const statistikSembako = ringkasDataKomoditas(komoditasData);
+    console.log("Statistik Harga Sembako Keseluruhan:", statistikSembako);
+
+    const cabaiRawit = cariKomoditasById(komoditasData, 4);
+    console.log(`INFO: Komoditas ${cabaiRawit.nama} dijual seharga ${formatRupiah(cabaiRawit.harga)}.`);
+
+} catch (error) {
+    console.error("Terjadi kegagalan saat memproses data sembako:", error.message);
 }
 
-// Menampilkan data lokasi tertentu menggunakan filter (Latihan 1)
-const wilayahNaik = wilayahData.filter(wilayah => wilayah.status === "up");
-
-// Pencarian alat(komoditas) menggunakan find (Latihan 2)
-function cariSembako(idDicari) {
-    return komoditasData.find(item => item.id === idDicari);
-}
-
-
-// ==========================================
-// INISIALISASI & ERROR HANDLING (Tugas OBE)
-// ==========================================
+// 4. RENDER UI KE DALAM HTML
 document.addEventListener('DOMContentLoaded', () => {
-    // Error Handling Dasar menggunakan try...catch
-    try {
-        if (!Array.isArray(komoditasData) || komoditasData.length === 0) {
-            throw new Error("Data komoditas gagal dimuat atau kosong!");
-        }
+    renderKomoditas();
+    renderWilayah();
+    renderHET();
 
-        // Render Antarmuka
-        renderKomoditas();
-        renderWilayah();
-        renderHET();
-        setupCarousel();
+    // 1. Panggil fungsi render berita yang baru
+    renderBerita();
 
-        // Tampilkan hasil pengolahan data ke Console (Langkah 7)
-        console.log("=== OUTPUT TUGAS MODUL 4 ===");
-        console.log("Ringkasan Data Sembako:", ringkasKomoditas(komoditasData));
-        console.log("Wilayah dengan Harga Naik:", wilayahNaik);
-
-        // Contoh pencarian ID 4 (Latihan 2)
-        const hasilCari = cariSembako(4);
-        if (hasilCari) {
-            console.log("Hasil Pencarian ID 4:", hasilCari);
-        }
-
-        // LATIHAN NO 3: Destructuring & Template Literal untuk setiap komoditas
-        console.log("--- Ringkasan Setiap Komoditas (Latihan 3) ---");
-        komoditasData.forEach(item => {
-            const { nama, harga, status } = item; // Destructuring
-            console.log(`Komoditas ${nama} saat ini dijual seharga ${formatRupiah(harga)} dengan tren ${status}.`); // Template literal
-        });
-        console.log("============================");
-
-    } catch (error) {
-        console.error("Terjadi Kesalahan Aplikasi:", error.message);
-    }
+    // 2. Gunakan fungsi setupSlider untuk kedua carousel
+    // (Pastikan tombol di HTML sudah diberi ID prev-komoditas & next-komoditas)
+    setupSlider('komoditas-container', 'prev-komoditas', 'next-komoditas');
+    setupSlider('berita-container', 'prev-berita', 'next-berita');
 });
 
 
-// ==========================================
-// FUNGSI RENDER UI
-// ==========================================
 
-// Fungsi Render Komoditas
+
 function renderKomoditas() {
     const container = document.getElementById('komoditas-container');
-    container.innerHTML = ''; 
+    container.innerHTML = '';
 
     komoditasData.forEach(item => {
         const badge = getBadgeConfig(item.status, item.selisih);
@@ -107,7 +80,7 @@ function renderKomoditas() {
             <div class="card">
                 <div class="card-img-wrap"><img src="${item.img}" alt="${item.nama}"></div>
                 <div class="card-title">${item.nama}</div>
-                <div class="card-price">${formatRupiah(item.harga)}<span style="font-size:0.7rem; color:#6b7280; font-weight:normal;">/kg</span></div>
+                <div class="card-price">${formatRupiah(item.harga)}<span style="font-size:0.85rem; color:var(--text-muted); font-weight:500; margin-left:4px;">/kg</span></div>
                 <div class="badge-container">
                     <div class="badge ${badge.class}">
                         <i class="fa-solid ${badge.icon}"></i> ${badge.text}
@@ -120,7 +93,6 @@ function renderKomoditas() {
     });
 }
 
-// Fungsi Render Daftar Wilayah (Tarakan)
 function renderWilayah() {
     const container = document.getElementById('region-container');
     container.innerHTML = '';
@@ -145,7 +117,26 @@ function renderWilayah() {
     });
 }
 
-// Fungsi Render Tabel HET
+// Fungsi Render Berita
+function renderBerita() {
+    const container = document.getElementById('berita-container');
+    container.innerHTML = '';
+
+    beritaData.forEach(item => {
+        // Kita menggunakan class 'card' yang sama agar desainnya konsisten
+        const html = `
+            <div class="card" style="min-width: 300px; text-align: left; align-items: flex-start;">
+                <div class="card-img-wrap" style="height: 150px; width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 15px;">
+                    <img src="${item.img}" alt="Berita" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">${item.tanggal}</div>
+                <div class="card-title" style="font-size: 1.1rem; line-height: 1.4;">${item.judul}</div>
+            </div>
+        `;
+        container.innerHTML += html;
+    });
+}
+
 function renderHET() {
     const container = document.getElementById('het-container');
     container.innerHTML = '';
@@ -162,17 +153,19 @@ function renderHET() {
     });
 }
 
-// Fungsi Scroll untuk Tombol Carousel Komoditas
-function setupCarousel() {
-    const track = document.getElementById('komoditas-container');
-    const btnPrev = document.querySelector('.prev-btn');
-    const btnNext = document.querySelector('.next-btn');
+// Fungsi Scroll Dinamis untuk segala jenis Carousel
+function setupSlider(trackId, prevBtnId, nextBtnId) {
+    const track = document.getElementById(trackId);
+    const btnPrev = document.getElementById(prevBtnId);
+    const btnNext = document.getElementById(nextBtnId);
 
-    btnNext.addEventListener('click', () => {
-        track.scrollBy({ left: 300, behavior: 'smooth' });
-    });
+    if (track && btnPrev && btnNext) {
+        btnNext.addEventListener('click', () => {
+            track.scrollBy({ left: 320, behavior: 'smooth' });
+        });
 
-    btnPrev.addEventListener('click', () => {
-        track.scrollBy({ left: -300, behavior: 'smooth' });
-    });
+        btnPrev.addEventListener('click', () => {
+            track.scrollBy({ left: -320, behavior: 'smooth' });
+        });
+    }
 }

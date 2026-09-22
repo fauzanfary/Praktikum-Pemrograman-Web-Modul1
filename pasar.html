@@ -1,0 +1,54 @@
+<!-- Main Content -->
+<main class="container">
+    <!-- Section: Peta Harga Per Wilayah -->
+    <section class="section section-gray">
+        <div class="section-header">
+            <h2>Peta harga komoditas hari ini di Tarakan</h2>
+            <p class="subtitle">Harga komoditas yang dipilih akan dibandingkan dengan hari sebelumnya 15 Sep 2026</p>
+            <div class="filter-dropdown">
+                <select id="select-komoditas">
+                    <option>Beras Medium</option>
+                    <option>Beras Premium</option>
+                    <option>Cabai Rawit Merah</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="map-layout">
+            <!-- Sisi Kiri: Ilustrasi Peta -->
+            <div class="map-illustration">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Peta_Administrasi_Kota_Tarakan.png/800px-Peta_Administrasi_Kota_Tarakan.png"
+                    alt="Peta Tarakan"
+                    style="width:100%; opacity:0.8; filter: grayscale(100%); mix-blend-mode: multiply;">
+            </div>
+
+            <!-- Sisi Kanan: Daftar Wilayah -->
+            <div class="region-list" id="region-container">
+                <!-- List Wilayah dirender oleh JS app.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Peraturan & HET -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Informasi Peraturan dan Harga Eceran Tertinggi (HET)</h2>
+            <p class="subtitle">Berikut adalah daftar komoditas pangan yang memiliki peraturan resmi beserta Harga
+                Eceran Tertinggi (HET) yang berlaku.</p>
+        </div>
+        <div class="table-container">
+            <table class="het-table">
+                <thead>
+                    <tr>
+                        <th>NAMA KOMODITAS</th>
+                        <th>HARGA ECERAN TERTINGGI</th>
+                        <th>PERATURAN</th>
+                    </tr>
+                </thead>
+                <tbody id="het-container">
+                    <!-- Tabel dirender oleh JS app.js -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
