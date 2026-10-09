@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container nav-container">
@@ -37,43 +36,30 @@
         <!-- Section 1: Harga Komoditas Rata-rata -->
         <section class="section">
             <div class="section-header text-center">
-                <h1>Harga rata-rata komoditas hari ini di Tarakan</h1>
-                <p class="subtitle">Harga dibandingkan dengan hari sebelumnya 15 Sep 2026</p>
+                <h2>Harga rata-rata komoditas hari ini di Tarakan</h2>
+                <p class="subtitle">Harga dibandingkan dengan hari sebelumnya</p>
             </div>
-
-            <div class="carousel-container">
-                <button class="nav-btn prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="komoditas-track" id="komoditas-container">
-                    <!-- Cards akan dirender oleh JS -->
+            
+            <div class="slider-wrapper" style="position: relative; padding: 0 40px;">
+                <button id="prev-komoditas" class="prev-btn" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 10; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;"><i class="fa-solid fa-chevron-left"></i></button>
+                
+                <div id="komoditas-container" style="display: grid; grid-template-rows: repeat(2, 1fr); grid-auto-flow: column; grid-auto-columns: 260px; gap: 20px; overflow-x: hidden; scroll-behavior: smooth; padding: 10px 5px;">
+                    <!-- Card komoditas akan dirender oleh JavaScript -->
                 </div>
-                <button class="nav-btn next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+
+                <button id="next-komoditas" class="next-btn" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 10; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
         </section>
 
         <!-- Section 2: Peta Harga Per Wilayah -->
-        <section class="section section-white"
-            style="border-radius: 20px; padding: 40px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); margin-bottom: 40px;">
+        <section class="section section-white" style="border-radius: 20px; padding: 40px; margin-bottom: 40px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
             <div class="section-header">
                 <h2>Peta harga komoditas hari ini di Tarakan</h2>
-                <p class="subtitle">Harga komoditas yang dipilih akan dibandingkan dengan hari sebelumnya 15 Sep 2026
-                </p>
-                <div class="filter-dropdown">
-                    <select id="select-komoditas">
-                        <option>Beras Medium</option>
-                        <option>Beras Premium</option>
-                        <option>Cabai Rawit Merah</option>
-                        <option>Daging Sapi Murni</option>
-                    </select>
-                </div>
             </div>
-
             <div class="map-layout">
-                <!-- Sisi Kiri: Ilustrasi Peta -->
                 <div class="map-illustration">
                     <img src="PETATARAKAN.png" alt="Peta Tarakan">
                 </div>
-
-                <!-- Sisi Kanan: Daftar Wilayah -->
                 <div class="region-list" id="region-container">
                     <!-- List Wilayah dirender oleh JS -->
                 </div>
@@ -84,8 +70,6 @@
         <section class="section">
             <div class="section-header text-center">
                 <h2>Informasi Peraturan dan Harga Eceran Tertinggi (HET)</h2>
-                <p class="subtitle">Berikut adalah daftar komoditas pangan yang memiliki peraturan resmi beserta Harga
-                    Eceran Tertinggi (HET) yang berlaku.</p>
             </div>
             <div class="table-container">
                 <table class="het-table">
@@ -102,74 +86,120 @@
                 </table>
             </div>
         </section>
-    </main>
 
-    <!-- Pre-Footer Call to Action -->
-    <div class="cta-banner">
-        <div class="container cta-content">
-            <div>
-                <h2>Butuh Bantuan?</h2>
-                <p>Tanyakan apapun dan tim kami akan siap membantumu!</p>
+        <!-- Section 4: Kesiapan Sarana (Modul 5) -->
+        <section class="section section-gray" style="border-radius: 20px; padding: 40px; margin-bottom: 40px;">
+            <div class="section-header text-center">
+                <h2>Kesiapan Sarana & Peralatan Pangan</h2>
+                <p class="subtitle">Kondisi dan ketersediaan sarana pendukung distribusi pangan di Tarakan</p>
             </div>
-            <button class="btn-solid-white">Hubungi Kami Sekarang</button>
-        </div>
-    </div>
 
-    <!-- Footer Utama -->
-    <footer class="footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <div class="logo-icon-large"><i class="fa-solid fa-chart-line"></i></div>
-                <div>
-                    <h3>Informasi Pangan Tarakan</h3>
-                    <p class="subtitle" style="color: #A0AEC0;">Sistem Informasi Pangan Kota Tarakan memberikan sajian
-                        harga bahan pokok dan penting tingkat kota.</p>
+            <!-- Kontrol Interaktif (Modul 5) -->
+            <div class="inventory-controls" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; background: var(--card-bg, #ffffff); padding: 15px 20px; border-radius: 12px;">
+                <div class="filter-buttons" style="display: flex; gap: 8px;">
+                    <button class="btn-filter active" data-filter="Semua">Semua</button>
+                    <button class="btn-filter" data-filter="Harga Naik">Harga Naik</button>
+                    <button class="btn-filter" data-filter="Harga Turun">Harga Turun</button>
+                    <button class="btn-filter" data-filter="Harga Stabil">Harga Stabil</button>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <input type="text" id="search-input" placeholder="Cari komoditas..." style="padding: 8px 14px; border: 1px solid #d1d5db; border-radius: 8px; outline: none;">
+                    <select id="limit-select" style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 8px;">
+                        <option value="5">5 Item</option>
+                        <option value="10">10 Item</option>
+                        <option value="20">20 Item</option>
+                    </select>
+                    <button id="theme-button" class="btn-theme-toggle" type="button" style="padding: 8px 16px; border-radius: 8px;">Mode Terang</button>
                 </div>
             </div>
-            <div class="footer-links">
-                <h4>Situs</h4>
-                <ul>
-                    <li><a href="#">Komoditas</a></li>
-                    <li><a href="#">Statistik</a></li>
-                    <li><a href="#">Berita</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Link</h4>
-                <ul>
-                    <li><a href="#">Dinas Perdagangan</a></li>
-                    <li><a href="#">Pasar Tenguyun</a></li>
-                    <li><a href="#">Tentang Kami</a></li>
-                </ul>
-            </div>
-        </div>
 
-        <!-- Section 4: Berita Terkini -->
+            <div id="daftar-alat" class="inventory-grid">
+                <!-- Kartu-kartu dimasukkan secara otomatis oleh js -->
+            </div>
+        </section>
+
+        <!-- Section 5: Form Pendataan -->
+        <section class="section section-white" style="border-radius: 20px; padding: 40px; margin-bottom: 40px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+            <div class="section-header text-center">
+                <h2>Tambah Data Komoditas Baru</h2>
+                <p class="subtitle">Form pendataan dengan validasi client-side dan aksesibilitas</p>
+            </div>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <form id="form-alat" novalidate>
+                    <!-- Nama -->
+                    <div style="margin-bottom: 20px;">
+                        <label for="nama" style="display: block; margin-bottom: 8px; font-weight: 600;">Nama Komoditas <span style="color: red;">*</span></label>
+                        <input type="text" id="nama" name="nama" required minlength="3" aria-describedby="error-nama" placeholder="Cth: Cabai Rawit" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px;">
+                        <span id="error-nama" class="error" style="color: #dc2626; font-size: 0.85rem; display: block; margin-top: 6px;"></span>
+                    </div>
+
+                    <!-- Kategori -->
+                    <div style="margin-bottom: 20px;">
+                        <label for="kategori" style="display: block; margin-bottom: 8px; font-weight: 600;">Kategori <span style="color: red;">*</span></label>
+                        <select id="kategori" name="kategori" required aria-describedby="error-kategori" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px;">
+                            <option value="">-- Pilih Kategori --</option>
+                            <option value="Bahan Pokok">Bahan Pokok</option>
+                            <option value="Minyak">Minyak</option>
+                            <option value="Bumbu Dapur">Bumbu Dapur</option>
+                            <option value="Daging & Telur">Daging & Telur</option>
+                            <option value="Alat Ukur Pasar">Alat Ukur Pasar</option>
+                        </select>
+                        <span id="error-kategori" class="error" style="color: #dc2626; font-size: 0.85rem; display: block; margin-top: 6px;"></span>
+                    </div>
+
+                    <!-- Harga / Jumlah -->
+                    <div style="margin-bottom: 20px;">
+                        <label for="jumlah" style="display: block; margin-bottom: 8px; font-weight: 600;">Harga/Jumlah (Rp) <span style="color: red;">*</span></label>
+                        <input type="number" id="jumlah" name="jumlah" required min="0" aria-describedby="error-jumlah" placeholder="Cth: 20000" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px;">
+                        <span id="error-jumlah" class="error" style="color: #dc2626; font-size: 0.85rem; display: block; margin-top: 6px;"></span>
+                    </div>
+
+                    <!-- Kondisi -->
+                    <div style="margin-bottom: 20px;">
+                        <label for="kondisi" style="display: block; margin-bottom: 8px; font-weight: 600;">Kondisi <span style="color: red;">*</span></label>
+                        <select id="kondisi" name="kondisi" required aria-describedby="error-kondisi" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px;">
+                            <option value="">-- Pilih Kondisi --</option>
+                            <option value="Harga Naik">Harga Naik</option>
+                            <option value="Harga Turun">Harga Turun</option>
+                            <option value="Harga Stabil">Harga Stabil</option>
+                        </select>
+                        <span id="error-kondisi" class="error" style="color: #dc2626; font-size: 0.85rem; display: block; margin-top: 6px;"></span>
+                    </div>
+
+                    <!-- Tanggal -->
+                    <div style="margin-bottom: 25px;">
+                        <label for="tanggal" style="display: block; margin-bottom: 8px; font-weight: 600;">Tanggal Pendataan <span style="color: red;">*</span></label>
+                        <input type="date" id="tanggal" name="tanggal" required aria-describedby="error-tanggal" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px;">
+                        <span id="error-tanggal" class="error" style="color: #dc2626; font-size: 0.85rem; display: block; margin-top: 6px;"></span>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">Simpan Data</button>
+                    <div id="form-status" style="margin-top: 20px; font-weight: bold; text-align: center; padding: 10px; border-radius: 6px;"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Section 6: Berita Terkini -->
         <section class="section">
             <div class="section-header">
                 <h2>Berita Pangan Terkini</h2>
-                <p class="subtitle">Informasi terbaru seputar harga dan ketersediaan sembako di Tarakan</p>
             </div>
-
             <div class="carousel-container">
-                <!-- Perhatikan penambahan ID khusus untuk tombol berita -->
                 <button class="nav-btn" id="prev-berita"><i class="fa-solid fa-chevron-left"></i></button>
-
-                <!-- Kita tetap pakai class "komoditas-track" karena efek CSS-nya sama -->
                 <div class="komoditas-track" id="berita-container">
                     <!-- Cards Berita akan dirender oleh JS -->
                 </div>
-
                 <button class="nav-btn" id="next-berita"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
+        </section>
+    </main>
 
-            <div class="container">
-                <div class="copyright">Copyright © 2026 Pemerintah Kota Tarakan - Dinas Perdagangan. All rights
-                    reserved.</div>
-            </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="copyright" style="text-align: center;">Copyright © 2026 Pemerintah Kota Tarakan. All rights reserved.</div>
+        </div>
     </footer>
 
     <script type="module" src="js/app.js"></script>
 </body>
-
 </html>

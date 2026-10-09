@@ -527,3 +527,147 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 20px;
 }
+
+/* ==========================================
+   STYLE KHUSUS INVENTARIS & KONTROL (MODUL 5)
+   ========================================== */
+
+/* Container Kontrol (Filter + Tombol Tema) */
+.inventory-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+    background-color: var(--card-bg, #ffffff);
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Group Tombol Filter */
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-filter {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-filter:hover {
+    background-color: #e5e7eb;
+}
+
+.btn-filter.active {
+    background-color: #0056b3; /* Warna Biru Utama IPJ */
+    color: #ffffff;
+    border-color: #0056b3;
+}
+
+/* Tombol Pengubah Tema */
+.btn-theme-toggle {
+    background-color: #0056b3;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.88rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-theme-toggle:hover {
+    background-color: #004085;
+}
+
+/* Grid Kartu Inventaris yang Seimbang */
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+/* Penyesuaian Kartu Inventaris */
+.inventory-grid .card {
+    background-color: var(--card-bg, #ffffff);
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inventory-grid .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+   1. DEFINISI VARIABEL TEMA (LIGHT & DARK)
+   ========================================== */
+
+/* Tema Terang (Default) */
+:root, [data-theme="light"] {
+    --bg-main: #f8fafc;
+    --bg-section-gray: #f1f5f9;
+    --card-bg: #ffffff;
+    --text-color: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --primary: #0056b3;
+    --primary-hover: #004085;
+}
+
+/* Tema Gelap (Aktif saat data-theme="dark") */
+[data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-section-gray: #1e293b;
+    --card-bg: #1e293b;
+    --text-color: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+}
+
+/* Penerapan Variabel ke Seluruh Halaman */
+body {
+    background-color: var(--bg-main);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Penerapan ke Kartu & Section */
+.card, .inventory-grid .card, .inventory-controls {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.section-gray {
+    background-color: var(--bg-section-gray) !important;
+}
+
+.card-title, h1, h2, h3, h4 {
+    color: var(--text-color) !important;
+}
+
+.subtitle {
+    color: var(--text-muted) !important;
+}
