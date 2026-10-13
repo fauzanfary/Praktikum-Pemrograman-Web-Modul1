@@ -44,15 +44,17 @@ let currentFilter = 'Semua';
 let currentSearch = ''; 
 let currentLimit = parseInt(localStorage.getItem('itemsPerPage')) || 5;
 
-// ==========================================
-// 2. INITIALIZATION ON DOMContentLoaded
-// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     // Render Komponen Utama
     renderKomoditas();
     renderWilayah();
     renderHET();
-    renderBerita();
+    
+    // ===================================
+    // Pemanggilan Modul 7 (Fetch API Berita)
+    loadBeritaAPI(); 
+    initBeritaEvents();
+    // ===================================
 
     // Modul 5: DOM, Event, Web Storage
     renderItems();            
@@ -232,12 +234,16 @@ function initFormValidasi() {
             errors.kategori = 'Kategori yang dipilih tidak valid.';
         }
 
+        const regexNama = /^[a-zA-Z0-9\s]+$/; // Hanya huruf, angka, dan spasi
+        
         if (!nama) {
             errors.nama = 'Nama komoditas wajib diisi.';
         } else if (nama.length < 3) {
             errors.nama = 'Nama alat/komoditas minimal 3 karakter.';
+        } else if (!regexNama.test(nama)) {
+            errors.nama = 'Nama hanya boleh berisi huruf dan angka, tanpa simbol khusus.';
         }
-
+        
         if (!kondisi) errors.kondisi = 'Kondisi wajib dipilih.';
 
         //  Validasi Tanggal
@@ -391,6 +397,112 @@ function setupSlider(trackId, prevBtnId, nextBtnId) {
 
         btnPrev.addEventListener('click', () => {
             track.scrollBy({ left: -320, behavior: 'smooth' });
+        });
+    }
+}
+
+// ==========================================
+// INTEGRASI MODUL 7: FETCH API, JSON, & ASYNC/AWAIT
+// ==========================================
+
+let beritaAPI = []; // Menampung cache data untuk filter pencarian client-side
+
+// [Sesuai Modul 7] Fallback Data Lokal saat API Publik Tidak Tersedia
+const USE_LOCAL_DATA = true; // Set 'true' agar menggunakan file JSON lokal di Laragon
+const endpoint_berita = USE_LOCAL_DATA 
+    ? './data/berita.json' 
+    : 'https://jsonplaceholder.typicode.com/posts?_limit=5';
+
+// [Langkah Praktikum 1-5] Async function untuk konsumsi REST API / JSON Lokal
+async function loadBeritaAPI() {
+    const container = document.getElementById('berita-container');
+    const statusBox = document.getElementById('berita-status');
+    const btnRetry = document.getElementById('btn-retry-berita');
+    
+    if (!container || !statusBox) return;
+
+    // [Langkah 5] Set Loading State
+    statusBox.textContent = 'Memuat berita terkini...';
+    statusBox.style.color = '#0053AA';
+    btnRetry.style.display = 'none';
+    container.replaceChildren(); // Bersihkan container dengan aman
+
+    try {
+        // [Langkah 2] GET Request menggunakan Fetch API
+        const response = await fetch(endpoint_berita);
+        
+        // [Langkah 3] Pengecekan response.ok
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        // [Langkah 4] Parsing JSON
+        const data = await response.json();
+        
+        // Memetakan data sesuai sumber (Lokal vs API Publik)
+        beritaAPI = USE_LOCAL_DATA ? data : data.map(item => ({
+            judul: item.title,
+            tanggal: "Dipublikasikan Hari Ini",
+            img: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=400&q=80"
+        }));
+
+        statusBox.textContent = ''; // Hapus teks loading jika sukses
+        renderBeritaList(beritaAPI); // Render hasil fetch ke DOM
+
+    } catch (error) {
+        // [Langkah 5] Set Error State & Munculkan Tombol Retry
+        console.error("Fetch Error:", error);
+        statusBox.textContent = 'Data gagal dimuat. Pastikan Anda menjalankan proyek via Localhost (Laragon).';
+        statusBox.style.color = '#dc2626';
+        
+        // [Latihan 1] Menampilkan tombol retry ketika request gagal
+        btnRetry.style.display = 'inline-block'; 
+    }
+}
+
+// Fungsi pembantu untuk merender data berita secara dinamis
+function renderBeritaList(dataList) {
+    const container = document.getElementById('berita-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (dataList.length === 0) {
+        container.innerHTML = '<p style="color:var(--text-muted); text-align:center; width:100%;">Tidak ada berita yang cocok dengan pencarian.</p>';
+        return;
+    }
+
+    dataList.forEach(item => {
+        const html = `
+            <div class="card" style="min-width: 300px; text-align: left; align-items: flex-start;">
+                <div class="card-img-wrap" style="height: 150px; width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 15px;">
+                    <img src="${item.img}" alt="Berita" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">${item.tanggal}</div>
+                <div class="card-title" style="font-size: 1.1rem; line-height: 1.4; text-transform: capitalize;">${item.judul}</div>
+            </div>
+        `;
+        container.innerHTML += html;
+    });
+}
+
+// Inisialisasi Event untuk Latihan Modul 
+function initBeritaEvents() {
+    const btnRetry = document.getElementById('btn-retry-berita');
+    const searchInput = document.getElementById('search-berita');
+
+    // [Latihan 1] Event listener tombol retry memanggil fetch ulang
+    if (btnRetry) {
+        btnRetry.addEventListener('click', loadBeritaAPI);
+    }
+
+    // [Latihan 2] Filter client-side berdasarkan input tanpa memanggil API setiap keypress
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const keyword = e.target.value.toLowerCase().trim();
+            const hasilFilter = beritaAPI.filter(berita => 
+                berita.judul.toLowerCase().includes(keyword)
+            );
+            renderBeritaList(hasilFilter);
         });
     }
 }

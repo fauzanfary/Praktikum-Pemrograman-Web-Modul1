@@ -179,6 +179,35 @@
             </div>
         </section>
 
+<!-- Section 6: Berita Terkini (Modul 7 - Fetch API & JSON) -->
+        <section class="section section-white" style="border-radius: 20px; padding: 40px; margin-bottom: 40px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+            <div class="section-header text-center">
+                <h2>Berita Pangan Terkini</h2>
+                <p class="subtitle">Informasi terbaru diambil secara dinamis melalui Fetch API</p>
+                
+                <!-- [Latihan 2] Input pencarian berita -->
+                <div style="max-width: 400px; margin: 15px auto 0;">
+                    <input type="text" id="search-berita" placeholder="Cari judul berita..." style="width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px; outline: none;">
+                </div>
+            </div>
+            
+            <!-- [Langkah Praktikum 5 & Latihan 1] Indikator Status & Tombol Retry -->
+            <div id="berita-status" style="text-align: center; margin-bottom: 15px; font-weight: 600;"></div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button id="btn-retry-berita" class="btn-primary" style="display: none;">
+                    <i class="fa-solid fa-rotate-right"></i> Coba Lagi
+                </button>
+            </div>
+
+            <div class="carousel-container">
+                <button class="nav-btn" id="prev-berita"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="komoditas-track" id="berita-container">
+                    <!-- Cards Berita akan dirender oleh JS dari Fetch API -->
+                </div>
+                <button class="nav-btn" id="next-berita"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+
         <!-- Section 6: Berita Terkini -->
         <section class="section">
             <div class="section-header">
